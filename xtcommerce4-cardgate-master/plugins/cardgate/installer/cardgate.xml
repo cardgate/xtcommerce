@@ -20,6 +20,10 @@
 			<title>CardGate</title>
 			<description></description>
 		</en>
+		<nl>
+			<title>CardGate</title>
+			<description></description>
+		</nl>
 	</payment>
 
 	<db_install><![CDATA[
@@ -35,684 +39,153 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<order>1</order>
 			<active>1</active>
 		</code>
-		<code>
-			<hook>class.checkout.php:_getPayment</hook>
-			<phpcode><![CDATA[
-      if(!empty($_COOKIE['QTAFFIWM'])){
-        foreach($payment_data as $k => $v) {
-          if ($k != 'cardgate') {
-            unset($payment_data[$k]);
-          }
-        }
-        reset($payment_data);
-      }
-    ]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-
-		<code>
-			<hook>class.checkout.php:_selectPayment_tpl_data</hook>
-			<phpcode><![CDATA[
-      require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/checkout_selectpayment_tpl_data.php';
-    ]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-
-		<code>
-			<hook>order_edit.php:display_data</hook>
-			<phpcode><![CDATA[
-            require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/order_edit_display_data.php';
-    ]]></phpcode>
-			<order>0</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>admin_dropdown.php:dropdown</hook>
-			<phpcode>
-                <![CDATA[include(_SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/admin_dropdown.php_dropdown.php');]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>module_checkout.php:checkout_payment_check</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/module_checkout_payment_check.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>customer:_getParams_row_actions</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/class.customer.php_getParams_row_actions.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>module_checkout.php:checkout_pre_data</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/module_checkout_pre_data.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>module_checkout.php:checkout_data</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/module_checkout_data.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>module_checkout.php:checkout_proccess_order_processed</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/module_checkout_proccess_order_processed.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>css_admin.php:css</hook>
-			<phpcode><![CDATA[include_once(_SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/ejsadmin.php__css_styles.php');]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>account_tpl_account_data</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/account_tpl_account_data.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-		<code>
-			<hook>class.orders.php:_sendOrderMail_bottom</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgate/hooks/class.orders.php_sendOrderMail_bottom.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
-
 	</plugin_code>
 
 	<configuration_payment>
-		<config>
-			<key>TEST_MODE</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>1</sort_order>
-			<de>
-				<title>Test Mode</title>
-			</de>
-			<en>
-				<title>Test Mode</title>
-			</en>
-		</config>
-		<config>
-			<key>SITE_ID</key>
-			<type>textfield</type>
-			<value>-</value>
-			<sort_order>3</sort_order>
-			<de>
-				<title>Site ID</title>
-			</de>
-			<en>
-				<title>Site ID</title>
-			</en>
-		</config>
-		<config>
-			<key>HASH_KEY</key>
-			<type>textfield</type>
-			<value></value>
-			<sort_order>6</sort_order>
-			<de>
-				<title>Hash Key</title>
-			</de>
-			<en>
-				<title>Hash key</title>
-			</en>
-		</config>
-		<config>
-			<key>MERCHANT_ID</key>
-			<type>textfield</type>
-			<value></value>
-			<sort_order>7</sort_order>
-			<de>
-				<title>Merchant ID</title>
-			</de>
-			<en>
-				<title>Merchant ID</title>
-			</en>
-		</config>
-		<config>
-			<key>MERCHANT_API_KEY</key>
-			<type>textfield</type>
-			<value></value>
-			<sort_order>7</sort_order>
-			<de>
-				<title>Merchant API Key</title>
-			</de>
-			<en>
-				<title>Merchant API Key</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_STATUS_COMPLETED</key>
-			<type>dropdown</type>
-			<url>status:order_status</url>
-			<value>23</value>
-			<sort_order>16</sort_order>
-			<de>
-				<title>Erfolgsstatus</title>
-			</de>
-			<en>
-				<title>success status</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_STATUS_FAILED</key>
-			<type>dropdown</type>
-			<url>status:order_status</url>
-			<value>32</value>
-			<sort_order>18</sort_order>
-			<de>
-				<title>Fehlerstatus</title>
-			</de>
-			<en>
-				<title>failure status</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_STATUS_CANCEL</key>
-			<type>dropdown</type>
-			<url>status:order_status</url>
-			<value>32</value>
-			<sort_order>20</sort_order>
-			<de>
-				<title>Abbruchstatus</title>
-			</de>
-			<en>
-				<title>CancelStatus</title>
-			</en>
-		</config>
 		<config>
 			<key>ORDER_STATUS_PENDING</key>
 			<type>dropdown</type>
 			<url>status:order_status</url>
 			<value>17</value>
-			<sort_order>22</sort_order>
+			<sort_order>90</sort_order>
 			<de>
 				<title>Bestellstatus für ausstehende Zahlung</title>
 			</de>
 			<en>
 				<title>Order Status for Pending transactions</title>
 			</en>
+			<nl>
+				<title>Order Status voor Pending transactie</title>
+			</nl>
 		</config>
 		<config>
-			<key>ACTIVATE_CCARD</key>
+			<key>ORDER_STATUS_CANCEL</key>
+			<type>dropdown</type>
+			<url>status:order_status</url>
+			<value>32</value>
+			<sort_order>80</sort_order>
+			<de>
+				<title>Abbruchstatus</title>
+			</de>
+			<en>
+				<title>Cancelstatus</title>
+			</en>
+			<nl>
+				<title>Annuleerstatus</title>
+			</nl>
+		</config>
+		<config>
+			<key>ORDER_STATUS_FAILED</key>
+			<type>dropdown</type>
+			<url>status:order_status</url>
+			<value>32</value>
+			<sort_order>70</sort_order>
+			<de>
+				<title>Fehlerstatus</title>
+			</de>
+			<en>
+				<title>failure status</title>
+			</en>
+			<nl>
+				<title>faal status</title>
+			</nl>
+		</config>
+		<config>
+			<key>ORDER_STATUS_COMPLETED</key>
+			<type>dropdown</type>
+			<url>status:order_status</url>
+			<value>23</value>
+			<sort_order>60</sort_order>
+			<de>
+				<title>Erfolgsstatus</title>
+			</de>
+			<en>
+				<title>success status</title>
+			</en>
+			<nl>
+				<title>success status</title>
+			</nl>
+		</config>
+		<config>
+			<key>MERCHANT_API_KEY</key>
+			<type>textfield</type>
+			<value></value>
+			<sort_order>50</sort_order>
+			<de>
+				<title>Merchant API Key</title>
+			</de>
+			<en>
+				<title>Merchant API Key</title>
+			</en>
+			<nl>
+				<title>Merchant API Key</title>
+			</nl>
+		</config>
+		<config>
+			<key>MERCHANT_ID</key>
+			<type>textfield</type>
+			<value></value>
+			<sort_order>40</sort_order>
+			<de>
+				<title>Merchant ID</title>
+			</de>
+			<en>
+				<title>Merchant ID</title>
+			</en>
+			<nl>
+				<title>Merchant ID</title>
+			</nl>
+		</config>
+		<config>
+			<key>HASH_KEY</key>
+			<type>textfield</type>
+			<value></value>
+			<sort_order>30</sort_order>
+			<de>
+				<title>Hash Key</title>
+			</de>
+			<en>
+				<title>Hash key</title>
+			</en>
+			<nl>
+				<title>Codeersleutel</title>
+			</nl>
+		</config>
+		<config>
+			<key>SITE_ID</key>
+			<type>textfield</type>
+			<value></value>
+			<sort_order>20</sort_order>
+			<de>
+				<title>Site ID</title>
+			</de>
+			<en>
+				<title>Site ID</title>
+			</en>
+			<nl>
+				<title>Site ID</title>
+			</nl>
+		</config>
+		<config>
+			<key>TEST_MODE</key>
 			<type>dropdown</type>
 			<value>true</value>
 			<url>conf_truefalse</url>
-			<sort_order>150</sort_order>
+			<sort_order>10</sort_order>
 			<de>
-				<title>Kreditkarte aktivieren</title>
+				<title>Test Mode</title>
 			</de>
 			<en>
-				<title>Activate Credit Card</title>
+				<title>Test Mode</title>
 			</en>
-		</config>
-		<config>
-			<key>ORDER_CCARD</key>
-			<type>dropdown</type>
-			<value>2</value>
-			<sort_order>160</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für Kreditkarte</title>
-			</de>
-			<en>
-				<title>Sortingorder for creditcard</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_CCARD</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>180</sort_order>
-			<de>
-				<title>Kundengruppe für Kreditkarte</title>
-			</de>
-			<en>
-				<title>Customergroup for creditcard</title>
-			</en>
-		</config>
-
-		<config>
-			<key>ACTIVATE_AFTERPAY</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>240</sort_order>
-			<de>
-				<title>Afterpay aktivieren</title>
-			</de>
-			<en>
-				<title>Activate Afterpay</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_AFTERPAY</key>
-			<type>dropdown</type>
-			<value>7</value>
-			<sort_order>260</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für Afterpay</title>
-			</de>
-			<en>
-				<title>Sortingorder for Afterpay</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_AFTERPAY</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>280</sort_order>
-			<de>
-				<title>Kundengruppe für Afterpay</title>
-			</de>
-			<en>
-				<title>Customergroup for Afterpay</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_BANCONTACT</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>240</sort_order>
-			<de>
-				<title>Bancontact aktivieren</title>
-			</de>
-			<en>
-				<title>Activate Bancontact</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_BANCONTACT</key>
-			<type>dropdown</type>
-			<value>7</value>
-			<sort_order>260</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für Bancontact</title>
-			</de>
-			<en>
-				<title>Sortingorder for Bancontact</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_BANCONTACT</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>280</sort_order>
-			<de>
-				<title>Kundengruppe für Bancontact</title>
-			</de>
-			<en>
-				<title>Customergroup for Bancontact</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_BANKTRANSFER</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>240</sort_order>
-			<de>
-				<title>Banktransfer aktivieren</title>
-			</de>
-			<en>
-				<title>Activate Banktransfer</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_BANKTRANSFER</key>
-			<type>dropdown</type>
-			<value>7</value>
-			<sort_order>260</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für Banktransfer</title>
-			</de>
-			<en>
-				<title>Sortingorder for Banktransfer</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_BANKTRANSFER</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>280</sort_order>
-			<de>
-				<title>Kundengruppe für Banktransfer</title>
-			</de>
-			<en>
-				<title>Customergroup for Banktransfer</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_BITCOIN</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>240</sort_order>
-			<de>
-				<title>Bitcoin aktivieren</title>
-			</de>
-			<en>
-				<title>Activate Bitcoin</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_BITCOIN</key>
-			<type>dropdown</type>
-			<value>7</value>
-			<sort_order>260</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für Bitcoin</title>
-			</de>
-			<en>
-				<title>Sortingorder for Bitcoin</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_BITCOIN</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>280</sort_order>
-			<de>
-				<title>Kundengruppe für Bitcoin</title>
-			</de>
-			<en>
-				<title>Customergroup for Bitcoin</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_DIRECT_DEBIT</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>240</sort_order>
-			<de>
-				<title>Lastschriftverfahren aktivieren</title>
-			</de>
-			<en>
-				<title>Activate Direct Debit</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_DIRECT_DEBIT</key>
-			<type>dropdown</type>
-			<value>7</value>
-			<sort_order>260</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für Lastschriftverfahren</title>
-			</de>
-			<en>
-				<title>Sortingorder for Direct Debit</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_DIRECT_DEBIT</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>280</sort_order>
-			<de>
-				<title>Kundengruppe für Lastschriftverfahren</title>
-			</de>
-			<en>
-				<title>Customergroup for Direct Debit</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_GIROPAY</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>340</sort_order>
-			<de>
-				<title>giropay aktivieren</title>
-			</de>
-			<en>
-				<title>Activate giropay</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_GIROPAY</key>
-			<type>dropdown</type>
-			<value>10</value>
-			<sort_order>360</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für giropay</title>
-			</de>
-			<en>
-				<title>Sortingorder for giropay</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_GIROPAY</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>380</sort_order>
-			<de>
-				<title>Kundengruppe für giropay</title>
-			</de>
-			<en>
-				<title>Customergroup for giropay</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_IDEAL</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>300</sort_order>
-			<de>
-				<title>iDEAL aktivieren</title>
-			</de>
-			<en>
-				<title>Activate iDEAL</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_IDEAL</key>
-			<type>dropdown</type>
-			<value>9</value>
-			<url>cardgate_set_payment_order</url>
-			<sort_order>310</sort_order>
-			<de>
-				<title>Reihenfolge für iDEAL</title>
-			</de>
-			<en>
-				<title>Sortingorder for iDEAL</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_IDEAL</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>320</sort_order>
-			<de>
-				<title>Kundengruppe für iDEAL</title>
-			</de>
-			<en>
-				<title>Customergroup for iDEAL</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_KLARNA</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>340</sort_order>
-			<de>
-				<title>Klarna aktivieren</title>
-			</de>
-			<en>
-				<title>Activate Klarna</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_KLARNA</key>
-			<type>dropdown</type>
-			<value>10</value>
-			<sort_order>360</sort_order>
-			<url>cardgate_set_payment_order</url>
-			<de>
-				<title>Reihenfolge für Klarna</title>
-			</de>
-			<en>
-				<title>Sortingorder for Klarna</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_KLARNA</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>380</sort_order>
-			<de>
-				<title>Kundengruppe für Klarna</title>
-			</de>
-			<en>
-				<title>Customergroup for Klarna</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_PAYPAL</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>400</sort_order>
-			<de>
-				<title>PayPal aktivieren</title>
-			</de>
-			<en>
-				<title>Activate PayPal</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_PAYPAL</key>
-			<type>dropdown</type>
-			<value>11</value>
-			<url>cardgate_set_payment_order</url>
-			<sort_order>400</sort_order>
-			<de>
-				<title>Reihenfolge für PayPal</title>
-			</de>
-			<en>
-				<title>Sortingorder for PayPal</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_PAYPAL</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>410</sort_order>
-			<de>
-				<title>Kundengruppe für PayPal</title>
-			</de>
-			<en>
-				<title>Customergroup for PayPal</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_P24</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>520</sort_order>
-			<de>
-				<title>Przelewy24 aktivieren</title>
-			</de>
-			<en>
-				<title>Activate Przelewy24</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_P24</key>
-			<type>dropdown</type>
-			<value>16</value>
-			<url>cardgate_set_payment_order</url>
-			<sort_order>530</sort_order>
-			<de>
-				<title>Reihenfolge für Przelewy24</title>
-			</de>
-			<en>
-				<title>Sortingorder for Przelewy24</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_P24</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>540</sort_order>
-			<de>
-				<title>Kundengruppe für Przelewy24</title>
-			</de>
-			<en>
-				<title>Customergroup for Przelewy24</title>
-			</en>
-		</config>
-		<config>
-			<key>ACTIVATE_SOFORTUEBERWEISUNG</key>
-			<type>dropdown</type>
-			<value>true</value>
-			<url>conf_truefalse</url>
-			<sort_order>420</sort_order>
-			<de>
-				<title>SOFORT Überweisung (PIN/TAN) aktivieren</title>
-			</de>
-			<en>
-				<title>Activate SOFORT Banking (PIN/TAN)</title>
-			</en>
-		</config>
-		<config>
-			<key>ORDER_SOFORTUEBERWEISUNG</key>
-			<type>dropdown</type>
-			<value>12</value>
-			<url>cardgate_set_payment_order</url>
-			<sort_order>440</sort_order>
-			<de>
-				<title>Reihenfolge für SOFORT Überweisung</title>
-			</de>
-			<en>
-				<title>Sortingorder for SOFORT Banking</title>
-			</en>
-		</config>
-		<config>
-			<key>PERMISSION_SOFORTUEBERWEISUNG</key>
-			<type>dropdown</type>
-			<value>0</value>
-			<url>customers_status</url>
-			<sort_order>460</sort_order>
-			<de>
-				<title>Kundengruppe für SOFORT Überweisung</title>
-			</de>
-			<en>
-				<title>Customergroup for SOFORT Banking</title>
-			</en>
+			<nl>
+				<title>Test Mode</title>
+			</nl>
 		</config>
 	</configuration_payment>
 
 	<language_content>
-		<phrase>
+	<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_AFTERPAY</key>
 			<class>store</class>
 			<de>
@@ -721,6 +194,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Afterpay</value>
 			</en>
+			<nl>
+				<value>Afterpay</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_BANCONTACT</key>
@@ -731,6 +207,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Bancontact</value>
 			</en>
+			<nl>
+				<value>Bancontact</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_BANKTRANSFER</key>
@@ -741,6 +220,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Banktransfer</value>
 			</en>
+			<nl>
+				<value>Bankoverboeking</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_BITCOIN</key>
@@ -751,9 +233,12 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Bitcoin</value>
 			</en>
+			<nl>
+				<value>Bitcoin</value>
+			</nl>
 		</phrase>
 		<phrase>
-			<key>TEXT_PAYMENT_CARDGATE_CCARD</key>
+			<key>TEXT_PAYMENT_CARDGATE_CREDITCARD</key>
 			<class>store</class>
 			<de>
 				<value>Kreditkarte</value>
@@ -761,9 +246,12 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Credit Card</value>
 			</en>
+			<nl>
+				<value>Creditcard</value>
+			</nl>
 		</phrase>
 		<phrase>
-			<key>TEXT_PAYMENT_CARDGATE_DIRECT_DEBIT</key>
+			<key>TEXT_PAYMENT_CARDGATE_DIRECTDEBIT</key>
 			<class>store</class>
 			<de>
 				<value>Lastschriftverfahren</value>
@@ -771,19 +259,25 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Direct Debit</value>
 			</en>
+			<nl>
+				<value>Direct Debit</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_GIROPAY</key>
 			<class>store</class>
 			<de>
-				<value>giropay</value>
+				<value>Giropay</value>
 			</de>
 			<en>
-				<value>giropay</value>
+				<value>Giropay</value>
 			</en>
+			<nl>
+				<value>Giropay</value>
+			</nl>
 		</phrase>
 		<phrase>
-			<key>TEXT_PAYMENT_CARDGATE_IDEAL</key>
+			<key>TEXT_PAYMENT_CARDGATE_IDEALPRO</key>
 			<class>store</class>
 			<de>
 				<value>iDEAL</value>
@@ -791,6 +285,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>iDEAL</value>
 			</en>
+			<nl>
+				<value>iDEAL</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_KLARNA</key>
@@ -801,6 +298,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Klarna</value>
 			</en>
+			<nl>
+				<value>Klarna</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_PAYPAL</key>
@@ -811,9 +311,12 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>PayPal</value>
 			</en>
+			<nl>
+				<value>PayPal</value>
+			</nl>
 		</phrase>
 		<phrase>
-			<key>TEXT_PAYMENT_CARDGATE_P24</key>
+			<key>TEXT_PAYMENT_CARDGATE_PRZELEWY24</key>
 			<class>store</class>
 			<de>
 				<value>Przelewy24</value>
@@ -821,9 +324,12 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Przelewy24</value>
 			</en>
+			<nl>
+				<value>Przelewy24</value>
+			</nl>
 		</phrase>
 		<phrase>
-			<key>TEXT_PAYMENT_CARDGATE_SOFORTUEBERWEISUNG</key>
+			<key>TEXT_PAYMENT_CARDGATE_SOFORTBANKING</key>
 			<class>store</class>
 			<de>
 				<value>SOFORT Überweisung (PIN/TAN)</value>
@@ -831,8 +337,10 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>SOFORT Banking (PIN/TAN)</value>
 			</en>
+			<nl>
+				<value>SOFORT Banking (PIN/TAN)</value>
+			</nl>
 		</phrase>
-
 		<phrase>
 			<key>TEXT_PAGE_TITLE_CARDGATE_CHECKOUT_SUCCESS</key>
 			<class>store</class>
@@ -842,6 +350,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Your order was successfully executed</value>
 			</en>
+			<nl>
+				<value>Uw order is succesvol verwerkt</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_CARDGATE_CHECKOUT_SUCCESS_DESC</key>
@@ -857,6 +368,12 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 					your order details!
 				</value>
 			</en>
+			<nl>
+				<value>Uw order is ontvangen en zal meteen verwerkt worden.
+					U heeft een email ontvangen waarmee u de details van de order kan
+					controleren.
+				</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAGE_TITLE_CARDGATE_CHECKOUT_PENDING</key>
@@ -867,6 +384,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Your order was successfully executed</value>
 			</en>
+			<nl>
+				<value>Uw order is succesvol uitgevoerd</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_CARDGATE_CHECKOUT_PENDING_DESC</key>
@@ -881,8 +401,13 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 					confirmation from your bank!
 				</value>
 			</en>
+			<nl>
+				<value>Bedankt voor uw aankoop, uw order wordt verstuurd zodra wij
+					de
+					betalingsbevestiging van uw bank hebben gekregen!
+				</value>
+			</nl>
 		</phrase>
-
 		<phrase>
 			<key>TEXT_CARDGATE_CHECKOUT_SUCCESS_THANKS</key>
 			<class>store</class>
@@ -892,6 +417,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Thank you for your purchase!</value>
 			</en>
+			<nl>
+				<value>Bedankt voor uw aankoop!</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAGE_TITLE_CARDGATE_CHECKOUT_CANCEL</key>
@@ -902,6 +430,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>The payment transaction was canceled.</value>
 			</en>
+			<nl>
+				<value>De betaling is geanulleerd.</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAGE_TITLE_CARDGATE_CHECKOUT_CANCEL_DESC</key>
@@ -918,6 +449,11 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 					about your order.
 				</value>
 			</en>
+			<nl>
+				<value>Helaas is de betaling geannuleerd. Neem contact op met
+					de webwinkeleigenaar indien u vragen heeft.
+				</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAGE_TITLE_CARDGATE_CHECKOUT_FAIL</key>
@@ -928,6 +464,9 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>An error has occured.</value>
 			</en>
+			<nl>
+				<value>Er is een fout opgetreden.</value>
+			</nl>
 		</phrase>
 		<phrase>
 			<key>TEXT_PAGE_TITLE_CARDGATE_CHECKOUT_FAIL_DESC</key>
@@ -938,6 +477,36 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			<en>
 				<value>Please check your data. Following errors occurred:</value>
 			</en>
+			<nl>
+				<value>Controleer uw data a.u.bv. De volgende fouten kwamen voor:
+				</value>
+			</nl>
+		</phrase>
+		<phrase>
+			<key>TEXT_CARDGATE_PAYMENT_COMMENT</key>
+			<class>store</class>
+			<de>
+				<value><![CDATA[Der Betrag wurde beglichen mittels:]]></value>
+			</de>
+			<en>
+				<value>The amount has been paid using:</value>
+			</en>
+			<nl>
+				<value>Het bedrag is betaald met:</value>
+			</nl>
+		</phrase>
+		<phrase>
+			<key>TEXT_CARDGATE_PAYMENT_PENDINGCOMMENT</key>
+			<class>store</class>
+			<de>
+				<value><![CDATA[Die Zahlung ist in Bearbeitung, es wird auf Verifizierung der Bank gewartet.]]></value>
+			</de>
+			<en>
+				<value>The payment is pending, waiting for bank approval.</value>
+			</en>
+			<nl>
+				<value>De betaling is pending, wachtend op bevestiging van de bank.</value>
+			</nl>
 		</phrase>
 	</language_content>
 </xtcommerceplugin>

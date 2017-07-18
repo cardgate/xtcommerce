@@ -39,8 +39,9 @@ if ($page->page_action == 'confirm') {
 	
 	// hash check
 	if (! empty ( $_GET ['hash'] )) {
+		$sRoot = dirname(dirname(dirname ( dirname ( __FILE__ ) )));
 		
-		require_once (dirname ( dirname ( __FILE__ ) ) . '/classes/cardgate-clientlib-php/init.php');
+		require_once ($sRoot . '/cardgate/classes/cardgate-clientlib-php/init.php');
 		
 		try {
 			$data = $_REQUEST;
@@ -68,6 +69,7 @@ if ($page->page_action == 'confirm') {
 	$iOrderId = ( int ) $fields ['ORDERID'];
 	
 	$order = new order ( $iOrderId, - 1 );
+	
 	if (checkPaid ( $order )) {
 		die ( 'Payment already processed!' );
 	}
@@ -96,9 +98,12 @@ if ($page->page_action == 'confirm') {
 			), 'UPDATE', 'TRID="' . $data ['reference'] . '"' );
 			updateOrderPayment ( $iOrderId, $paymentState );
 		}
-		$strMsg = 'The amount has been authorized and captured by CardGate.';
+		
+		$strMsg = TEXT_CARDGATE_PAYMENT_COMMENT.' '. constant ( "TEXT_PAYMENT_CARDGATE_" . strtoupper ( $data ['pt']) );
+		;
+		
 		$order->_sendOrderMail ();
-		$order->_updateOrderStatus ( CARDGATE_ORDER_STATUS_COMPLETED, $strMsg, 'true' );
+		$order->_updateOrderStatus ( CARDGATE_ORDER_STATUS_COMPLETED, $strMsg, 'true', 'true','user' , $data['transaction']);
 	}
 	
 	if ($paymentState == 'PENDING') {
@@ -107,8 +112,8 @@ if ($page->page_action == 'confirm') {
 				'STATE' => $paymentState 
 		), 'UPDATE', 'TRID="' . $data ['reference'] . '"' );
 		
-		$strMsg = 'The payment is pending, waiting for bank approval.';
-		$order->_updateOrderStatus ( CARDGATE_ORDER_STATUS_PENDING, $strMsg, 'false' );
+		$strMsg = TEXT_CARDGATE_PAYMENT_PENDINGCOMMENT;
+		$order->_updateOrderStatus ( CARDGATE_ORDER_STATUS_PENDING, $strMsg, 'true', 'true','user' , $data['transaction']);
 	}
 	
 	if ($paymentState == 'CANCEL') {
@@ -129,7 +134,6 @@ if ($page->page_action == 'confirm') {
 	}
 	
 	die ( $data ['transaction'] . '.' . $data ['code'] );
-	
 } else {
 	
 	$strState = "";

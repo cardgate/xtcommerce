@@ -33,33 +33,5 @@
 
 defined('_VALID_CALL') or die('Direct Access is not allowed.');
 
-/** @global ADODB_mysql $db */
-global $db;
-
-$db->Execute("
-CREATE TABLE IF NOT EXISTS `cardgate_transaction` (
-  `TRID` varchar(255) NOT NULL default '',
-  `DATE` datetime NOT NULL default '0000-00-00 00:00:00',
-  `PAYSYS` varchar(50) NOT NULL default '',
-  `BRAND` varchar(100) NOT NULL default '',
-  `ORDERNUMBER` int(11) unsigned NOT NULL default '0',
-  `ORDERDESCRIPTION` varchar(255) NOT NULL default '',
-  `STATE` varchar(20) NOT NULL default '',
-  `MESSAGE` varchar(255) NOT NULL default '',
-  `ORDERID` int(11) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`TRID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1  AUTO_INCREMENT=1;
-");
-
-$db->IgnoreErrors();
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 24, '', 0, 10000.00, 0, 1);");
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 25, '', 0, 10000.00, 0, 1);");
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 26, '', 0, 10000.00, 0, 1);");
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 27, '', 0, 10000.00, 0, 1);");
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 28, '', 0, 10000.00, 0, 1);");
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 29, '', 0, 10000.00, 0, 1);");
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 30, '', 0, 10000.00, 0, 1);");
-$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 31, '', 0, 10000.00, 0, 1);");
-$db->Execute("ALTER TABLE `cardgate_transaction` ADD `RESPONSEDATA` TEXT NULL DEFAULT NULL");
-
-
+$sRootPath = dirname(dirname(dirname(dirname(__FILE__))));
+require_once($sRootPath . '/cardgate/installer/install.php');

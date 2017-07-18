@@ -51,14 +51,14 @@ class cardgate {
 			'CARDGATE_BANCONTACT' => 'bancontact',
 			'CARDGATE_BANKTRANSFER' => 'banktransfer',
 			'CARDGATE_BITCOIN' => 'bitcoin',
-			'CARDGATE_CCARD' => 'creditcard',
-			'CARDGATE_DIRECT_DEBIT' => 'directdebit',
+			'CARDGATE_CREDITCARD' => 'creditcard',
+			'CARDGATE_DIRECTDEBIT' => 'directdebit',
 			'CARDGATE_GIROPAY' => 'giropay',
-			'CARDGATE_IDEAL' => 'idealpro',
+			'CARDGATE_IDEALPRO' => 'idealpro',
 			'CARDGATE_KLARNA' => 'klarna',
 			'CARDGATE_PAYPAL' => 'paypal',
-			'CARDGATE_P24' => 'przelewy24',
-			'CARDGATE_SOFORTUEBERWEISUNG' => 'sofortbanking' 
+			'CARDGATE_PRZELEWY24' => 'przelewy24',
+			'CARDGATE_SOFORTBANKING' => 'sofortbanking'
 	);
 	
 	/**
@@ -83,7 +83,8 @@ class cardgate {
 	 * @access public
 	 */
 	function pspRedirect($aOrderData = null) {
-		global $xtLink, $filter, $order, $db, $language;		
+		
+		global $xtLink, $filter, $order, $db, $language;
 		require_once 'cardgate-clientlib-php/init.php';
 		
 		if (! $aOrderData) {
@@ -99,7 +100,7 @@ class cardgate {
 					'page' => 'cardgate_checkout',
 					'paction' => 'failure',
 					'conn' => 'SSL',
-					'params' => 'code_1=210' 
+					'params' => 'code_1=210'
 			) );
 		}
 		// Special, da xt der Meinung ist alle alten GET Parameter mit anzuh�ngen
@@ -124,14 +125,14 @@ class cardgate {
 			$sPaymentMethod = $this->paymentTypes [$_SESSION ['selected_payment_sub']];
 			$sSuccessUrl = $this->_link ( array (
 					'page' => 'cardgate_checkout',
-					'conn' => 'SSL' 
+					'conn' => 'SSL'
 			) );
 			$sFailureUrl = $sSuccessUrl;
 			$sCallbackUrl = $this->_link ( array (
 					'lang_code' => $language->default_language,
 					'page' => 'cardgate_checkout',
 					'paction' => 'confirm',
-					'conn' => 'SSL' 
+					'conn' => 'SSL'
 			) );
 			$reference = 'O' . time () . $iOrderId;
 			
@@ -148,7 +149,7 @@ class cardgate {
 			// Configure payment option.
 			$oTransaction->setPaymentMethod ( $sPaymentMethod );
 			if ($sPaymentMethod == 'idealpro') {
-				$oTransaction->setIssuer ( 'bankOption' );
+				$oTransaction->setIssuer ( $_SESSION['cardgate_ideal_bank']);
 			}
 			
 			// Configure customer.
@@ -166,7 +167,7 @@ class cardgate {
 				$oCart = $oTransaction->getCart ();
 				$aCartItems = $this->getCartItems( $order, $iAmount);
 				
-				foreach ( $aCartItems as $item ) {			
+				foreach ( $aCartItems as $item ) {
 					switch ($item ['type']) {
 						case 'product' :
 							$iItemType = \cardgate\api\Item::TYPE_PRODUCT;
@@ -241,7 +242,7 @@ class cardgate {
 					'page' => 'cardgate_checkout',
 					'paction' => 'failure',
 					'conn' => 'SSL',
-					'params' => 'code_1=209' 
+					'params' => 'code_1=209'
 			);
 		}
 		return true;
@@ -257,7 +258,7 @@ class cardgate {
 		$failureUrl = $xtLink->_link ( array (
 				'page' => 'cardgate_checkout',
 				'params' => 'message=' . $message,
-				'conn' => 'SSL' 
+				'conn' => 'SSL'
 		) );
 		$xtLink->_redirect ( $failureUrl );
 	}
@@ -331,24 +332,24 @@ class cardgate {
 		$iExtraFee;
 		
 		/*
-		$fpExtraFee = (empty ( $woocommerce->session->extra_cart_fee ) ? 0 : $woocommerce->session->extra_cart_fee);
-		$iExtraFee = round ( $fpExtraFee * 100 );
-		
-		if ($iExtraFee > 0) {
-			
-			$nr ++;
-			$items [$nr] ['type'] = 'paymentfee';
-			$items [$nr] ['model'] = 'extra_costs';
-			$items [$nr] ['name'] = 'payment_fee';
-			$items [$nr] ['quantity'] = 1;
-			$items [$nr] ['price_wt'] = $iExtraFee;
-			$items [$nr] ['vat'] = 0;
-			$items [$nr] ['vat_amount'] = 0;
-		}
-		*/
+		 $fpExtraFee = (empty ( $woocommerce->session->extra_cart_fee ) ? 0 : $woocommerce->session->extra_cart_fee);
+		 $iExtraFee = round ( $fpExtraFee * 100 );
+		 
+		 if ($iExtraFee > 0) {
+		 
+		 $nr ++;
+		 $items [$nr] ['type'] = 'paymentfee';
+		 $items [$nr] ['model'] = 'extra_costs';
+		 $items [$nr] ['name'] = 'payment_fee';
+		 $items [$nr] ['quantity'] = 1;
+		 $items [$nr] ['price_wt'] = $iExtraFee;
+		 $items [$nr] ['vat'] = 0;
+		 $items [$nr] ['vat_amount'] = 0;
+		 }
+		 */
 		
 		$iCorrection = round ( $iOrderTotal - $iCartItemTotal - $iCartItemTaxTotal - $iShippingTotal - $iShippingVatTotal - $iExtraFee );
-	
+		
 		if ($iCorrection != 0) {
 			
 			$nr ++;
@@ -361,5 +362,34 @@ class cardgate {
 			$items [$nr] ['vat_amount'] = 0;
 		}
 		return $items;
+	}
+	function getBanks(){
+		
+		try {
+			
+			require_once 'cardgate-clientlib-php/init.php';
+			
+			$iMerchantId = ( int ) CARDGATE_MERCHANT_ID;
+			$sMerchantApiKey = CARDGATE_MERCHANT_API_KEY;
+			$bIsTest = (CARDGATE_TEST_MODE == 'true' ? true : false);
+			
+			$oCardGate = new cardgate\api\Client ( ( int ) $iMerchantId, $sMerchantApiKey, $bIsTest );
+			$oCardGate->setIp ( $_SERVER ['REMOTE_ADDR'] );
+			
+			$aIssuers = $oCardGate->methods ()->get ( cardgate\api\Method::IDEAL )->getIssuers ();
+		} catch ( cardgate\api\Exception $oException_ ) {
+			$aIssuers [0] = [
+					'id' => 0,
+					'name' => htmlspecialchars ( $oException_->getMessage () )
+			];
+		}
+		
+		$options = array ();
+		
+		foreach ( $aIssuers as $aIssuer ) {
+			
+			$options[] = array('id'=>$aIssuer ['id'],'name' => $aIssuer ['name']);
+		}
+		return $options;
 	}
 }

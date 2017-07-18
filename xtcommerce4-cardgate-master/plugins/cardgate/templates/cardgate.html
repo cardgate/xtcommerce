@@ -72,7 +72,16 @@
         <input id=selected_payment_{$payment.img} type="radio" name="selected_payment" value={$payment_code}:{$payment.name}>
     </td>
     <td class="col-md-4">
-        <img src="plugins/cardgate/images/paymenttypes/{$payment.img}.png" class="img-responsive" style="max-height: 49px; max-width: 90px;">
+        <label for=selected_payment_{$payment.img}><img src="plugins/cardgate/images/paymenttypes/{$payment.img}.png" class="img-responsive" style="max-height: 49px; max-width: 90px;"></label>
+        {if $payment.name eq 'CARDGATE_IDEALPRO'}
+        <label for=selected_payment_{$payment.img}>
+        <select style="width:180px" name="cardgate_bank">
+        	{foreach from=$cardgate_ideal_banks item=bank}
+        		<option value="{$bank.id}">{$bank.name}</option>
+       		{/foreach}
+        </select>
+        </label>
+        {/if}
     </td>
     <td class="col-md-12">
         <label for=selected_payment_{$payment.img}>{$payment.text}</label>
