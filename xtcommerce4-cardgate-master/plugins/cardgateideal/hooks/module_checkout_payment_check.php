@@ -33,6 +33,9 @@
 
 defined('_VALID_CALL') or die('Direct Access is not allowed.');
 
-if($_POST['selected_payment']=='cardgateideal'){
+//correct for xtCommerce5
+$sSelPayment = (substr($_POST['selected_payment'],-1) == ':' ? substr($_POST['selected_payment'],0,-1):$_POST['selected_payment']);
+
+if($sSelPayment=='cardgateideal'){
 	$_SESSION['cardgate_ideal_bank'] = $_POST['cardgate_bank'];
 } 

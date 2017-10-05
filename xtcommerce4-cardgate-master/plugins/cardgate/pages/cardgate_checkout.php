@@ -54,7 +54,7 @@ if ($page->page_action == 'confirm') {
 			$oCardGate->setIp ( $_SERVER ['REMOTE_ADDR'] );
 			
 			if (FALSE == $oCardGate->transactions ()->verifyCallback ( $data, $sHashKey )) {
-				die ( 'Hashckeck failed!' );
+				die ( 'Hashcheck failed!' );
 			}
 		} catch ( cardgate\api\Exception $oException_ ) {
 			die ( 'Hashckeck failed!' );

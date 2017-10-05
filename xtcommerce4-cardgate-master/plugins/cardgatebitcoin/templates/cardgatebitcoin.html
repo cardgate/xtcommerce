@@ -33,32 +33,24 @@
 {if $plugin}
 
 {capture name="paymenttypes"}
-<h4>No CardGate paymenttype activated</h4>
 {/capture}
 
 {if $plugin->getMajorVersion() > 4}
 {capture name="paymenttypes"}
-{foreach from=$bitcoin_payment_types item=payment}
-{if $payment.active eq 'true'}
-<li class="list-group-item clearfix list-group-item-25{$payment.name} cursor-pointer active" data-toggle="collapse" data-target=".item-25{$payment.name} .collapse">
-    <div class="item item-{$payment.img}{if $payment_code == $payment.name} selected{/if} payment-container">
-        <img src="plugins/cardgate/images/paymenttypes/{$payment.img}.png" type=w_media_payment alt=$payment.text class="icon img-responsive img-thumbnail pull-right" style="max-height: 49px;
-        max-width: 95px;">
-        <header>
+    <div class="item item-{$payment_code} payment-container">
+        <img src="plugins/{$payment_code}/images/{$payment_code}.png" class="icon img-responsive img-thumbnail pull-right" alt={$payment_name} >
+        <header data-toggle="collapse" data-target=".item-{$payment_code} .collapse">
             <label class="cursor-pointer">
                 <span class="check">
-                    <input id=selected_payment_{$payment.img} type=radio name=selected_payment value={$payment_code}:{$payment.name} >
+                    <input type=radio name=selected_payment value={$payment_code}:{$payment.name} style="vertical-align: text-top;" id=selected_payment{$payment_id} >
                 </span>
-                <span class="name payment-name">{$payment.text}</span>
+                <span class="name payment-name">{$payment_name}</span>
                 {if $payment_price.formated}
                 <small class="price">&nbsp;{$payment_price.formated}</small>
                 {/if}
             </label>
         </header>
     </div>
-</li>
-{/if}
-{/foreach}
 {/capture}
 {/if}
 
@@ -66,7 +58,7 @@
 {capture name="paymenttypes"}
  <tr>
    <td class="main" width="10px">{form type=radio name=selected_payment value=$payment_code}</td>
-   <td class="main" width="100px"><img src="plugins/cardgatebitcoin/images/{$payment_code}.png" border="0"/></td>
+   <td class="main" width="100px"><img src="plugins/{$payment_code}/images/{$payment_code}.png" border="0"/></td>
    <td class="main"><strong>{$payment_name}</strong></td>
   </tr>
 {/capture}
@@ -112,22 +104,8 @@
 <div style="clear:both;height:0px;"></div>
 
 {elseif $plugin->getMajorVersion() > 4}
-{literal}
-<style>
-    .wdtitle {
-        display: inline-block;
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-</style>
-{/literal}
-
-</li>
 {$smarty.capture.paymenttypes}
 {else}
-
 <table class="paymentblock" width="100%" border="0" cellspacing="0" cellpadding="6">
     <tr>
         <td class="header"></td>
