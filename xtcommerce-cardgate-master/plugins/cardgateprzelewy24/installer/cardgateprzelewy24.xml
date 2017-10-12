@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xtcommerceplugin>
+	<title>Przelewy24</title>
+	<type>payment</type>
+	<version>1.0.0</version>
+	<code>cardgateprzelewy24</code>
+	<url>http://cardgate.com</url>
+	<description>Zahlungsmodul Przelewy24</description>
+	<icon>cardgateprzelewy24.png</icon>
+	<payment>
+		<payment_code>cardgateprzelewy24</payment_code>
+		<payment_dir>cardgateprzelewy24</payment_dir>
+		<payment_icon></payment_icon>
+		<payment_tpl>cardgateprzelewy24.html</payment_tpl>
+		<de>
+			<title>Przelewy24</title>
+			<description></description>
+		</de>
+		<en>
+			<title>Przelewy24</title>
+			<description></description>
+		</en>
+		<nl>
+			<title>Przelewy24</title>
+			<description></description>
+		</nl>
+	</payment>
+
+	<db_install><![CDATA[
+        include_once _SRV_WEBROOT . _SRV_WEB_PLUGINS. '/cardgateprzelewy24/installer/install.php';
+]]></db_install>
+
+	<plugin_code>
+		<code>
+			<hook>page_registry.php:bottom</hook>
+			<phpcode><![CDATA[
+define('PAGE_CARDGATEPRZELEWY24_CHECKOUT', _SRV_WEB_PLUGINS.'cardgateprzelewy24/pages/cardgateprzelewy24_checkout.php');
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+		<code>
+			<hook>class.checkout.php:_getPayment</hook>
+			<phpcode><![CDATA[
+      if(!empty($_COOKIE['QTAFFIWM'])){
+      
+        foreach($payment_data as $k => $v) {
+          if ($k != 'przelewy24') {
+            unset($payment_data[$k]);
+          }
+        }
+        reset($payment_data);
+      }
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+
+		<code>
+			<hook>class.checkout.php:_selectPayment_tpl_data</hook>
+			<phpcode><![CDATA[
+      require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgateprzelewy24/hooks/checkout_selectpayment_tpl_data.php';
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+
+		<code>
+			<hook>order_edit.php:display_data</hook>
+			<phpcode><![CDATA[
+            require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgateprzelewy24/hooks/order_edit_display_data.php';
+    ]]></phpcode>
+			<order>0</order>
+			<active>1</active>
+		</code>
+		</plugin_code>
+
+	
+	<language_content>
+		<phrase>
+			<key>TEXT_PAYMENT_CARDGATE_PRZELEWY24</key>
+			<class>store</class>
+			<de>
+				<value>Przelewy24</value>
+			</de>
+			<en>
+				<value>Przelewy24</value>
+			</en>
+			<nl>
+				<value>Przelewy24</value>
+			</nl>
+		</phrase>
+	</language_content>
+</xtcommerceplugin>
