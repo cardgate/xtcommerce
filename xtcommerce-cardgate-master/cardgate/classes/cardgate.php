@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.1';
+	var $version = '1.5.2';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
@@ -83,7 +83,8 @@ class cardgate {
 	 * @access public
 	 */
 	function pspRedirect($aOrderData = null) {
-		global $xtLink, $filter, $order, $dbxtcommerce-cardgate-master 'cardgate-clientlib-php/init.php';
+		global $xtLink, $filter, $order, $db, $language;
+		require_once 'cardgate-clientlib-php/init.php';
 		
 		if (! $aOrderData) {
 			$aOrderData = $order->order_data;
@@ -358,7 +359,9 @@ class cardgate {
 		return $items;
 	}
 	function getBanks() {
-xtcommerce-cardgate-master 'cardgate-clientlib-php/init.php';
+		try {
+			
+			require_once 'cardgate-clientlib-php/init.php';
 			
 			$iMerchantId = ( int ) CARDGATE_MERCHANT_ID;
 			$sMerchantApiKey = CARDGATE_MERCHANT_API_KEY;
