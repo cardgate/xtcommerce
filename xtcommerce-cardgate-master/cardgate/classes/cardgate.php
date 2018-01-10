@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.2';
+	var $version = '1.5.3';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
@@ -149,14 +149,14 @@ class cardgate {
 			}
 			
 			// Configure customer.
-			$oCustomer = $oTransaction->getCustomer ();
-			$oCustomer->setEmail ( $order->order_data ['customers_email_address'] );
-			$oCustomer->address ()->setFirstName ( $order->order_data ['billing_firstname'] );
-			$oCustomer->address ()->setLastName ( $order->order_data ['billing_lastname'] );
-			$oCustomer->address ()->setAddress ( $order->order_data ['billing_street_address'] );
-			$oCustomer->address ()->setZipCode ( $order->order_data ['billing_postcode'] );
-			$oCustomer->address ()->setCity ( $order->order_data ['billing_city'] );
-			$oCustomer->address ()->setCountry ( $order->order_data ['billing_country_code'] );
+			$oConsumer = $oTransaction->getConsumer ();
+			$oConsumer->setEmail ( $order->order_data ['customers_email_address'] );
+			$oConsumer->address ()->setFirstName ( $order->order_data ['billing_firstname'] );
+			$oConsumer->address ()->setLastName ( $order->order_data ['billing_lastname'] );
+			$oConsumer->address ()->setAddress ( $order->order_data ['billing_street_address'] );
+			$oConsumer->address ()->setZipCode ( $order->order_data ['billing_postcode'] );
+			$oConsumer->address ()->setCity ( $order->order_data ['billing_city'] );
+			$oConsumer->address ()->setCountry ( $order->order_data ['billing_country_code'] );
 			
 			// add cartitmes
 			

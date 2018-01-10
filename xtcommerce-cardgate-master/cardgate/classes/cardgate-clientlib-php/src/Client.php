@@ -35,7 +35,7 @@ namespace cardgate\api {
 		/**
 		 * Client version.
 		 */
-		const CLIENT_VERSION = "0.0.1";
+		const CLIENT_VERSION = "1.1.4";
 
 		/**
 		 * Url to use for production.
@@ -97,11 +97,18 @@ namespace cardgate\api {
 		private $_oTransactions = NULL;
 
 		/**
-		 * The customers resource.
-		 * @var resource\Customers
+		 * The subscriptions resource.
+		 * @var resource\Subscriptions
 		 * @access private
 		 */
-		private $_oCustomers = NULL;
+		private $_oSubscriptions = NULL;
+
+		/**
+		 * The consumers resource.
+		 * @var resource\Consumers
+		 * @access private
+		 */
+		private $_oConsumers = NULL;
 
 		/**
 		 * The issuers resource.
@@ -271,7 +278,59 @@ namespace cardgate\api {
 		 * @api
 		 */
 		public function getUrl() {
-			return ( $this->getTestmode() ? self::URL_STAGING : self::URL_PRODUCTION );
+			if ( ! empty( $_SERVER['CG_API_URL'] ) ) {
+				return $_SERVER['CG_API_URL'];
+			} else {
+				return ( $this->getTestmode() ? self::URL_STAGING : self::URL_PRODUCTION );
+			}
+		}
+
+		/**
+		 * Pull the config from the API using a token provided by the site setup button in the backoffice.
+		 * @return Array Returns an array with settings.
+		 * @access public
+		 * @api
+		 */
+		static public function pullConfig( $sToken_, $bTestmode_ = FALSE ) {
+			if ( ! is_string( $sToken_ ) ) {
+				throw new Exception( 'Client.Token.Invalid', 'invalid token for settings pull: ' . $sToken_ );
+			}
+
+			$sResource = "pullconfig/{$sToken_}/";
+			$sUrl = ( $bTestmode_ ? self::URL_STAGING : self::URL_PRODUCTION ) . $sResource;
+
+			$rCh = curl_init();
+			curl_setopt( $rCh, CURLOPT_URL, $sUrl );
+			curl_setopt( $rCh, CURLOPT_RETURNTRANSFER, 1 );
+			curl_setopt( $rCh, CURLOPT_TIMEOUT, 60 );
+			curl_setopt( $rCh, CURLOPT_HEADER, FALSE );
+			curl_setopt( $rCh, CURLOPT_HTTPHEADER, [
+				'Content-Type: application/json',
+				'Accept: application/json'
+			] );
+			if ( $bTestmode_ ) {
+				curl_setopt( $rCh, CURLOPT_SSL_VERIFYPEER, FALSE );
+				curl_setopt( $rCh, CURLOPT_SSL_VERIFYHOST, 0 );
+			} else {
+				curl_setopt( $rCh, CURLOPT_SSL_VERIFYPEER, TRUE ); // verify SSL peer
+				curl_setopt( $rCh, CURLOPT_SSL_VERIFYHOST, 2 ); // check for valid common name and verify host
+			}
+
+			if ( FALSE == ( $sResults = curl_exec( $rCh ) ) ) {
+				$sError = curl_error( $rCh );
+				curl_close( $rCh );
+				throw new Exception( 'Client.Request.Curl.Error', $sError );
+			} else {
+				curl_close( $rCh );
+			}
+			if ( NULL === ( $aResults = json_decode( $sResults, TRUE ) ) ) {
+				throw new Exception( 'Client.Request.JSON.Invalid', 'remote gave invalid JSON: ' . $sResults );
+			}
+			if ( isset( $aResults['error'] ) ) {
+				throw new Exception( 'Client.Request.Remote.' . $aResults['error']['code'], $aResults['error']['message'] );
+			}
+
+			return $aResults;
 		}
 
 		/**
@@ -301,16 +360,29 @@ namespace cardgate\api {
 		}
 
 		/**
-		 * Accessor for the customers resource.
-		 * @return resource\Customers
+		 * Accessor for the subscriptions resource.
+		 * @return resource\Subscriptions
 		 * @access public
 		 * @api
 		 */
-		public function customers() {
-			if ( NULL == $this->_oCustomers ) {
-				$this->_oCustomers = new resource\Customers( $this );
+		public function subscriptions() {
+			if ( NULL == $this->_oSubscriptions ) {
+				$this->_oSubscriptions = new resource\Subscriptions( $this );
 			}
-			return $this->_oCustomers;
+			return $this->_oSubscriptions;
+		}
+
+		/**
+		 * Accessor for the consumers resource.
+		 * @return resource\Consumers
+		 * @access public
+		 * @api
+		 */
+		public function consumers() {
+			if ( NULL == $this->_oConsumers ) {
+				$this->_oConsumers = new resource\Consumers( $this );
+			}
+			return $this->_oConsumers;
 		}
 
 		/**
