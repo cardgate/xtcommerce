@@ -35,19 +35,19 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 
 6. Check mark the CardGate plug-ins and choose **enable selection** to activate them.
 
-5. In the menu on the left choose **Configuration** and then **method of payment**.
+7. In the menu on the left choose **Configuration** and then **method of payment**.
 
-6. Select the CardGate plug-in and click on **edit**.
+8. Select the CardGate plug-in and click on **edit**.
 
-7. Now enter the **Merchant API key**, **Merchant ID**, **Hash key** and the **Site ID**,  
+9. Now enter the **Merchant API key**, **Merchant ID**, **Hash key** and the **Site ID**,  
    which has been sent via the ticket "Checkout installation" in [My Cardgate](https://my.cardgate.com/).
 
-8. Also enter the other values if necessary and **save** the settings.  
+10. Also enter the other values if necessary and **save** the settings.  
    **REMARK:** Do **not activate** the CardGate plug-in since it is only used to save the settings that are used by the CardGate Payment methods.
 
-9. Check mark the **CardGate Payment methods** you wish to use and click **enable selection**.
+11. Check mark the **CardGate Payment methods** you wish to use and click **enable selection**.
 
-10. When you are finished testing go to **Configuration** in the **CardGate** module and switch **Test Mode** from **true** to **false** and save it (**Save**)
+12. When you are finished testing go to **Configuration** in the **CardGate** module and switch **Test Mode** from **true** to **false** and save it (**Save**)
 
 ## Requirements
 
