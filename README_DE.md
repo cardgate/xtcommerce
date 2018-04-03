@@ -1,10 +1,6 @@
 ![CardGate](https://cdn.curopayments.net/thumb/200/logos/cardgate.png)
 
-# CardGate Modul für xtCommerce
-
-[![Total Downloads](https://img.shields.io/packagist/dt/cardgate/xtcommerce.svg)](https://packagist.org/packages/cardgate/xtcommerce)
-[![Latest Version](https://img.shields.io/packagist/v/cardgate/xtcommerce.svg)](https://github.com/cardgate/xtcommerce/releases)
-[![Build Status](https://travis-ci.org/cardgate/xtcommerce.svg?branch=master)](https://travis-ci.org/cardgate/xtcommerce)
+# CardGate Plug-in für xtCommerce
 
 ## Support
 
@@ -12,8 +8,8 @@ Dieses Plug-in ist geeignet für xtCommerce **4** und **5**.
 
 ## Vorbereitung
 
-The usage of this module requires that you have obtained CardGate RESTful API credentials.
-Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful API username and password, or contact your accountmanager.
+Um dieses Modul zu verwenden sind Zugangsdate zur CardGate RESTful API notwendig.  
+Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdaten an, oder kontaktieren Sie Ihren Accountmanager.
 
 ## Installation
 
@@ -25,7 +21,8 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 
 1. Gehen Sie zu dem **Adminbereich** Ihrer Webseite und wählen **Plugins, deinstallierte Plugins** aus.
 
-2. Scrollen bis zum Modul **Payment** und selektieren Sie das **CardGate** Plug-in. (Wahrscheinlich wird das Plug-in auf der folgenden Seite zu finden sein).
+2. Scrollen bis zum Modul **Payment** und selektieren Sie das **CardGate** Plug-in.  
+   (Wahrscheinlich wird das Plug-in auf der folgenden Seite zu finden sein).
 
 3. Klicken Sie auf **Run** at **Actions** um das Plug-in zu installieren.
 
@@ -40,7 +37,7 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 8. Selektieren Sie das CardGate Plug-in und klicken Sie auf **Bearbeiten**.
 
 9. Fügen Sie jetzt den **Merchant API Key**, **Merchant ID**, **HashKey**, und **Site ID** ein,  
-   welche Ihnen mit dem Ticket "Checkout Installation" in [My Cardgate](https://my.cardgate.com/) versendet wurde.
+   welche Ihnen mit dem Ticket "Checkout Installation" in [My CardGate](https://my.cardgate.com/) versendet wurde.
 
 10. Fügen Sie falls notwendig auch die anderen Werte ein und **speichern** Sie die Einstellungen.  
     **ACHTUNG: Aktivieren** Sie nicht das CardGate Plug-in, dieses dient lediglich dazu um die CardGate Zahlungsmethoden zu installieren.
@@ -50,6 +47,6 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 12. Wenn Sie das Testen abgeschlossen haben, gehen Sie zu **Einstellungen** in dem CardGate Modul  
     und schalten Sie den **Testmodus** in den **Livemodus** und speichern Sie die Einstellung (**Speichern**).
 
-## Requirements
+## Anforderungen
 
-No further requirements.
+Keine weiteren Anforderungen.
