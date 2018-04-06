@@ -2,10 +2,6 @@
 
 # CardGate module for xtCommerce
 
-[![Total Downloads](https://img.shields.io/packagist/dt/cardgate/xtcommerce.svg)](https://packagist.org/packages/cardgate/xtcommerce)
-[![Latest Version](https://img.shields.io/packagist/v/cardgate/xtcommerce.svg)](https://github.com/cardgate/xtcommerce/releases)
-[![Build Status](https://travis-ci.org/cardgate/xtcommerce.svg?branch=master)](https://travis-ci.org/cardgate/xtcommerce)
-
 ## Support
 
 This plugin supports xtCommerce versions **4** and **5**.
@@ -39,7 +35,7 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 
 8. Select the CardGate plug-in and click on **edit**.
 
-9. Now enter the **Merchant API key**, **Merchant ID**, **Hash key** and the **Site ID**,  
+9. Now enter the **Merchant API Key**, **Merchant Id**, **Hash Key** and the **Site Id**,  
    which has been sent via the ticket "Checkout installation" in [My Cardgate](https://my.cardgate.com/).
 
 10. Also enter the other values if necessary and **save** the settings.  

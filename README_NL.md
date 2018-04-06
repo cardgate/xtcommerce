@@ -2,10 +2,6 @@
 
 # CardGate module voor xtCommerce
 
-[![Total Downloads](https://img.shields.io/packagist/dt/cardgate/xtcommerce.svg)](https://packagist.org/packages/cardgate/xtcommerce)
-[![Latest Version](https://img.shields.io/packagist/v/cardgate/xtcommerce.svg)](https://github.com/cardgate/xtcommerce/releases)
-[![Build Status](https://travis-ci.org/cardgate/xtcommerce.svg?branch=master)](https://travis-ci.org/cardgate/xtcommerce)
-
 ## Support
 
 Deze plug-in is geschikt voor xtCommerce versies **4** and **5**.
@@ -40,7 +36,7 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
 
 8. Kies de CardGate plug-in en klik op **Bewerken**.
 
-9. Vul nu de **Merchant API key**, de **Merchant ID**, de **Hash key (Codeersleutel)** en de **Site ID** in zoals die aan je  
+9. Vul nu de **Merchant API Key**, de **Merchant Id**, de **Hash Key (Codeersleutel)** en de **Site Id** in zoals die aan je  
    toegestuurd zijn via het bericht "Installeren webshop-kassa" in [Mijn CardGate](https://my.cardgate.com/).
 
 10. Vul ook de andere waarden in indien nodig, en sla het op.  

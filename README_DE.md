@@ -36,7 +36,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 
 8. Selektieren Sie das CardGate Plug-in und klicken Sie auf **Bearbeiten**.
 
-9. Fügen Sie jetzt den **Merchant API Key**, **Merchant ID**, **HashKey**, und **Site ID** ein,  
+9. Fügen Sie jetzt den **Merchant API Key**, **Merchant Id**, **Hash Key**, und **Site Id** ein,  
    welche Ihnen mit dem Ticket "Checkout Installation" in [My CardGate](https://my.cardgate.com/) versendet wurde.
 
 10. Fügen Sie falls notwendig auch die anderen Werte ein und **speichern** Sie die Einstellungen.  
