@@ -8,7 +8,7 @@ This plugin supports xtCommerce versions **4** and **5**.
 
 ## Preparation
 
-The usage of this module requires that you have obtained CardGate RESTful API credentials.
+The usage of this module requires that you have obtained CardGate RESTful API credentials.  
 Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentials, or contact your accountmanager.
 
 ## Installation
@@ -21,7 +21,7 @@ Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentia
 
 1. Go to the **admin** of your website, and choose **Plugins, plugins uninstalled**.
 
-2. Scroll to Module **Payment** and select **CardGate** plug-in. (Possibly you may find it on the next page)..
+2. Scroll to Module **Payment** and select **CardGate** plug-in. (Possibly you may find it on the next page).
 
 3. Click on **Run** at **Actions** to install the plug-in.
 
