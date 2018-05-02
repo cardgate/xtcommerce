@@ -9,13 +9,13 @@ This plugin supports xtCommerce versions **4** and **5**.
 ## Preparation
 
 The usage of this module requires that you have obtained CardGate RESTful API credentials.
-Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful API username and password, or contact your accountmanager.
+Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentials, or contact your accountmanager.
 
 ## Installation
 
-1. Download the **xtcommerce.zip** file to your desktop.
+1. Download and unzip the most recent [source code](https://github.com/cardgate/xtcommerce/releases) file on your desktop.
 
-2. Unzip the file, and upload the contents of the **xtcommerce** folder to the **root** of your website.
+2. Upload the contents of the **xtcommerce** folder to the **root** of your website.
 
 ## Configuration
 
@@ -35,8 +35,8 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your RESTful A
 
 8. Select the CardGate plug-in and click on **edit**.
 
-9. Now enter the **Merchant API Key**, **Merchant Id**, **Hash Key** and the **Site Id**,  
-   which has been sent via the ticket "Checkout installation" in [My Cardgate](https://my.cardgate.com/).
+9. Now enter the **site ID**, **hash key**, **merchant ID** and the **API key**,  
+   which has been sent via the ticket "Checkout installation" in [My CardGate](https://my.cardgate.com/).
 
 10. Also enter the other values if necessary and **save** the settings.  
    **REMARK:** Do **not activate** the CardGate plug-in since it is only used to save the settings that are used by the CardGate Payment methods.

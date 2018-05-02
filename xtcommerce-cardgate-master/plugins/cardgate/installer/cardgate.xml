@@ -107,18 +107,33 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			</nl>
 		</config>
 		<config>
-			<key>MERCHANT_API_KEY</key>
+			<key>SITE_ID</key>
 			<type>textfield</type>
 			<value></value>
-			<sort_order>50</sort_order>
+			<sort_order>20</sort_order>
 			<de>
-				<title>Merchant API Key</title>
+				<title>Site ID</title>
 			</de>
 			<en>
-				<title>Merchant API Key</title>
+				<title>Site ID</title>
 			</en>
 			<nl>
-				<title>Merchant API Key</title>
+				<title>Site ID</title>
+			</nl>
+		</config>
+		<config>
+			<key>HASH_KEY</key>
+			<type>textfield</type>
+			<value></value>
+			<sort_order>30</sort_order>
+			<de>
+				<title>Hash key</title>
+			</de>
+			<en>
+				<title>Hash key</title>
+			</en>
+			<nl>
+				<title>Hash key</title>
 			</nl>
 		</config>
 		<config>
@@ -137,33 +152,18 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			</nl>
 		</config>
 		<config>
-			<key>HASH_KEY</key>
+			<key>MERCHANT_API_KEY</key>
 			<type>textfield</type>
 			<value></value>
-			<sort_order>30</sort_order>
+			<sort_order>50</sort_order>
 			<de>
-				<title>Hash Key</title>
+				<title>API key</title>
 			</de>
 			<en>
-				<title>Hash key</title>
+				<title>API key</title>
 			</en>
 			<nl>
-				<title>Codeersleutel</title>
-			</nl>
-		</config>
-		<config>
-			<key>SITE_ID</key>
-			<type>textfield</type>
-			<value></value>
-			<sort_order>20</sort_order>
-			<de>
-				<title>Site ID</title>
-			</de>
-			<en>
-				<title>Site ID</title>
-			</en>
-			<nl>
-				<title>Site ID</title>
+				<title>API key</title>
 			</nl>
 		</config>
 		<config>

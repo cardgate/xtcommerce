@@ -14,7 +14,7 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
 
 ## Installatie
 
-1. Download en unzip het **xtcommerce.zip** bestand op je bureaublad.
+1. Download en unzip de meest recente [source code](https://github.com/cardgate/xtcommerce/releases/) op je bureaublad.
 
 2. Plaats de **inhoud** van de **xtcommerce** map in de root van je website.
 
@@ -34,9 +34,9 @@ RESTful API gebruikersnaam en wachtwoord op, of neem contact op met je accountma
 
 7. Kies in het linkermenu voor **Instellingen** en dan **Betaalmethoden.**
 
-8. Kies de CardGate plug-in en klik op **Bewerken**.
+8. Kies de CardGate plug-in en klik op **Bewerken.**
 
-9. Vul nu de **Merchant API Key**, de **Merchant Id**, de **Hash Key (Codeersleutel)** en de **Site Id** in zoals die aan je  
+9. Vul nu de **site ID**, de **hash key**, de **merchant ID** en de **API key** in zoals die aan je  
    toegestuurd zijn via het bericht "Installeren webshop-kassa" in [Mijn CardGate](https://my.cardgate.com/).
 
 10. Vul ook de andere waarden in indien nodig, en sla het op.  
