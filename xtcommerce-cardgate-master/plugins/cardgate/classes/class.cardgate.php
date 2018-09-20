@@ -45,11 +45,12 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.4';
+	var $version = '1.5.5';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
 			'CARDGATE_BANKTRANSFER' => 'banktransfer',
+	        'CARDGATE_BILLINK' => 'billink',
 			'CARDGATE_BITCOIN' => 'bitcoin',
 			'CARDGATE_CREDITCARD' => 'creditcard',
 			'CARDGATE_DIRECTDEBIT' => 'directdebit',
