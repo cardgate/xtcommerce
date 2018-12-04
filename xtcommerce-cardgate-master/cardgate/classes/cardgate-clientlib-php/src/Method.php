@@ -113,6 +113,11 @@ namespace cardgate\api {
 		const BILLINK = 'billink';
 		
 		/**
+		 * iDEAL QR
+		 */
+		const IDEALQR = 'idealqr';
+		
+		/**
 		 * The client associated with this payment method.
 		 * @var Client
 		 * @access private

@@ -56,6 +56,7 @@ class cardgate {
 			'CARDGATE_DIRECTDEBIT' => 'directdebit',
 			'CARDGATE_GIROPAY' => 'giropay',
 			'CARDGATE_IDEALPRO' => 'idealpro',
+	        'CARDGATE_IDEALQR' => 'idealqr',
 			'CARDGATE_KLARNA' => 'klarna',
 			'CARDGATE_PAYPAL' => 'paypal',
 	        'CARDGATE_PAYSAFECARD' => 'paysafecard',
