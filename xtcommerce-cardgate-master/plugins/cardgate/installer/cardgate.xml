@@ -225,6 +225,19 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			</nl>
 		</phrase>
 		<phrase>
+			<key>TEXT_PAYMENT_CARDGATE_BILLINK</key>
+			<class>store</class>
+			<de>
+				<value>Billink</value>
+			</de>
+			<en>
+				<value>Billink</value>
+			</en>
+			<nl>
+				<value>Billink</value>
+			</nl>
+		</phrase>
+		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_BITCOIN</key>
 			<class>store</class>
 			<de>
@@ -277,6 +290,19 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			</nl>
 		</phrase>
 		<phrase>
+			<key>TEXT_PAYMENT_CARDGATE_IDEALQR</key>
+			<class>store</class>
+			<de>
+				<value>iDEAL QR</value>
+			</de>
+			<en>
+				<value>iDEAL QR</value>
+			</en>
+			<nl>
+				<value>iDEAL QR</value>
+			</nl>
+		</phrase>
+		<phrase>
 			<key>TEXT_PAYMENT_CARDGATE_IDEALPRO</key>
 			<class>store</class>
 			<de>
@@ -313,6 +339,19 @@ define('PAGE_CARDGATE_CHECKOUT', _SRV_WEB_PLUGINS.'cardgate/pages/cardgate_check
 			</en>
 			<nl>
 				<value>PayPal</value>
+			</nl>
+		</phrase>
+		<phrase>
+			<key>TEXT_PAYMENT_CARDGATE_PAYSAFECARD</key>
+			<class>store</class>
+			<de>
+				<value>Paysafecard</value>
+			</de>
+			<en>
+				<value>Paysafecard</value>
+			</en>
+			<nl>
+				<value>Paysafecard</value>
 			</nl>
 		</phrase>
 		<phrase>
