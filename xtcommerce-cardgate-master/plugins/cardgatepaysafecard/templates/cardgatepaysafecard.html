@@ -38,7 +38,7 @@
 {if $plugin->getMajorVersion() > 4}
 {capture name="paymenttypes"}
     <div class="item item-{$payment_code} payment-container">
-        <img src="plugins/{$payment_code}/images/{$payment_code}.png" class="icon img-responsive img-thumbnail pull-right" alt={$payment_name} >
+        <img src="https://cdn.curopayments.net/images/paymentmethods/{substr($payment_code,8)}.svg" style="max-height:30px;max-width:70px;" class="icon img-responsive img-thumbnail pull-right" alt={$payment_name} >
         <header data-toggle="collapse" data-target=".item-{$payment_code} .collapse">
             <label class="cursor-pointer">
                 <span class="check">
@@ -58,7 +58,7 @@
 {capture name="paymenttypes"}
  <tr>
    <td class="main" width="10px">{form type=radio name=selected_payment value=$payment_code}</td>
-   <td class="main" width="100px"><img src="plugins/{$payment_code}/images/{$payment_code}.png" border="0"/></td>
+   <td class="main" width="100px"><img src="https://cdn.curopayments.net/images/paymentmethods/{substr($payment_code,8)}.svg" border="0"/></td>
    <td class="main"><strong>{$payment_name}</strong></td>
   </tr>
 {/capture}

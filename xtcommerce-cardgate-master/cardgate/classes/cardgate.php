@@ -54,11 +54,14 @@ class cardgate {
 			'CARDGATE_BITCOIN' => 'bitcoin',
 			'CARDGATE_CREDITCARD' => 'creditcard',
 			'CARDGATE_DIRECTDEBIT' => 'directdebit',
+	        'CARDGATE_GIFTCARD' => 'giftcard',
 			'CARDGATE_GIROPAY' => 'giropay',
 			'CARDGATE_IDEALPRO' => 'idealpro',
+	        'CARDGATE_IDEALQR' => 'idealqr',
 			'CARDGATE_KLARNA' => 'klarna',
 			'CARDGATE_PAYPAL' => 'paypal',
 	        'CARDGATE_PAYSAFECARD' => 'paysafecard',
+	        'CARDGATE_PAYSAFECASH' => 'paysafecash', 
 			'CARDGATE_PRZELEWY24' => 'przelewy24',
 			'CARDGATE_SOFORTBANKING' => 'sofortbanking' 
 	);
