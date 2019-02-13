@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xtcommerceplugin>
+	<title>Gift Card</title>
+	<type>payment</type>
+	<version>1.0.0</version>
+	<code>cardgategiftcard</code>
+	<url>http://cardgate.com</url>
+	<description>Zahlungsmodul Gift Card</description>
+	<icon>cardgategiftcard.png</icon>
+	<payment>
+		<payment_code>cardgategiftcard</payment_code>
+		<payment_dir>cardgategiftcard</payment_dir>
+		<payment_icon></payment_icon>
+		<payment_tpl>cardgategiftcard.html</payment_tpl>
+		<de>
+			<title>Gift Card</title>
+			<description></description>
+		</de>
+		<en>
+			<title>Gift Card</title>
+			<description></description>
+		</en>
+		<nl>
+			<title>Gift Card</title>
+			<description></description>
+		</nl>
+	</payment>
+
+	<db_install><![CDATA[
+        include_once _SRV_WEBROOT . _SRV_WEB_PLUGINS. '/cardgategiftcard/installer/install.php';
+]]></db_install>
+
+	<plugin_code>
+		<code>
+			<hook>page_registry.php:bottom</hook>
+			<phpcode><![CDATA[
+define('PAGE_CARDGATEGIFTCARD_CHECKOUT', _SRV_WEB_PLUGINS.'cardgategiftcard/pages/cardgategiftcard_checkout.php');
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+		<code>
+			<hook>class.checkout.php:_getPayment</hook>
+			<phpcode><![CDATA[
+      if(!empty($_COOKIE['QTAFFIWM'])){
+      
+        foreach($payment_data as $k => $v) {
+          if ($k != 'giftcard') {
+            unset($payment_data[$k]);
+          }
+        }
+        reset($payment_data);
+      }
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+
+		<code>
+			<hook>class.checkout.php:_selectPayment_tpl_data</hook>
+			<phpcode><![CDATA[
+      require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgategiftcard/hooks/checkout_selectpayment_tpl_data.php';
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+
+		<code>
+			<hook>order_edit.php:display_data</hook>
+			<phpcode><![CDATA[
+            require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgategiftcard/hooks/order_edit_display_data.php';
+    ]]></phpcode>
+			<order>0</order>
+			<active>1</active>
+		</code>
+		</plugin_code>
+
+	
+	<language_content>
+		<phrase>
+			<key>TEXT_PAYMENT_CARDGATE_GIFTCARD</key>
+			<class>store</class>
+			<de>
+				<value>Gift Card</value>
+			</de>
+			<en>
+				<value>Gift Card</value>
+			</en>
+			<nl>
+				<value>Gift Card</value>
+			</nl>
+		</phrase>
+	</language_content>
+</xtcommerceplugin>
