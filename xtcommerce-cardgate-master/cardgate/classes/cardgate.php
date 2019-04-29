@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.5';
+	var $version = '1.5.6';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
@@ -364,24 +364,8 @@ class cardgate {
 		return $items;
 	}
 	function getBanks() {
-		try {
-			
-			require_once 'cardgate-clientlib-php/init.php';
-			
-			$iMerchantId = ( int ) CARDGATE_MERCHANT_ID;
-			$sMerchantApiKey = CARDGATE_MERCHANT_API_KEY;
-			$bIsTest = (CARDGATE_TEST_MODE == 'true' ? true : false);
-			
-			$oCardGate = new cardgate\api\Client ( ( int ) $iMerchantId, $sMerchantApiKey, $bIsTest );
-			$oCardGate->setIp ( $_SERVER ['REMOTE_ADDR'] );
-			
-			$aIssuers = $oCardGate->methods ()->get ( cardgate\api\Method::IDEAL )->getIssuers ();
-		} catch ( cardgate\api\Exception $oException_ ) {
-			$aIssuers [0] = [ 
-					'id' => 0,
-					'name' => htmlspecialchars ( $oException_->getMessage () ) 
-			];
-		}
+	    $this->checkBanks();
+		$aIssuers = $this->fetchIssuers();
 		
 		$options = array ();
 		
@@ -393,5 +377,70 @@ class cardgate {
 			);
 		}
 		return $options;
+	}
+	
+	function checkBanks(){
+	    global $db;
+	    
+	    $sMode = (CARDGATE_TEST_MODE == 'true'? 'TEST': 'LIVE');
+	    
+	    $sIssuerRefresh = $db->GetOne("SELECT config_value FROM ".TABLE_CONFIGURATION_PAYMENT." WHERE config_key='CARDGATEIDEAL_ISSUER_REFRESH'");
+	    if ($sIssuerRefresh === NULL){
+	        $oResult = $db->Execute("SELECT payment_id, shop_id FROM ".TABLE_CONFIGURATION_PAYMENT." WHERE config_key='CARDGATEIDEAL_ORDER_STATUS_NEW'");
+	        $aFields = $oResult->fields;
+	        $db->Execute("INSERT INTO ". TABLE_CONFIGURATION_PAYMENT." (config_key, config_value, type, payment_id, shop_id ) VALUES ('CARDGATEIDEAL_ISSUER_REFRESH', '".$sMode."0', 'hidden', ". $aFields['payment_id'].", '". $aFields['shop_id']."')");
+	    }
+	    $sIssuerRefresh = $db->GetOne("SELECT config_value FROM ".TABLE_CONFIGURATION_PAYMENT." WHERE config_key='CARDGATEIDEAL_ISSUER_REFRESH'");
+	    $sIssuerMode = substr($sIssuerRefresh, 0, 4);
+	    $iIssuerRefresh = (int) substr($sIssuerRefresh, 4);
+	    
+	    if (($sMode != $sIssuerMode) || ($iIssuerRefresh < time())){
+	        $this->refreshIssuers();
+	    }
+	}
+	
+	function refreshIssuers(){
+	    global $db;
+	    
+	    $sIssuers = $db->GetOne("SELECT config_value FROM ".TABLE_CONFIGURATION_PAYMENT." WHERE config_key='CARDGATEIDEAL_ISSUERS'");
+	    if ($sIssuers === NULL){
+	        $oResult = $db->Execute("SELECT payment_id, shop_id FROM ".TABLE_CONFIGURATION_PAYMENT." WHERE config_key='CARDGATEIDEAL_ORDER_STATUS_NEW'");
+	        $aFields = $oResult->fields;
+	        $db->Execute("INSERT INTO ". TABLE_CONFIGURATION_PAYMENT." (config_key, config_value, type, payment_id, shop_id ) VALUES ('CARDGATEIDEAL_ISSUERS', '', 'hidden', ". $aFields['payment_id'].", '". $aFields['shop_id']."')");
+	    }
+	    
+	    try {
+	        
+	        require_once 'cardgate-clientlib-php/init.php';
+	        
+	        $iMerchantId = ( int ) CARDGATE_MERCHANT_ID;
+	        $sMerchantApiKey = CARDGATE_MERCHANT_API_KEY;
+	        $bIsTest = (CARDGATE_TEST_MODE == 'true' ? true : false);
+	        
+	        $oCardGate = new cardgate\api\Client ( ( int ) $iMerchantId, $sMerchantApiKey, $bIsTest );
+	        $oCardGate->setIp ( $_SERVER ['REMOTE_ADDR'] );
+	        
+	        $aIssuers = $oCardGate->methods ()->get ( cardgate\api\Method::IDEAL )->getIssuers ();
+	    } catch ( cardgate\api\Exception $oException_ ) {
+	        $aIssuers [0] = [
+	            'id' => 0,
+	            'name' => htmlspecialchars ( $oException_->getMessage () )
+	        ];
+	    }
+	    
+	    $sIssuers = serialize($aIssuers);
+	    $sMode = ($bIsTest ? 'TEST':'LIVE');
+	    $iRefreshTime = $sMode . (24 * 60 * 60 + time());
+
+	    $db->execute("UPDATE ". TABLE_CONFIGURATION_PAYMENT. " SET config_value='" .$sIssuers ."' WHERE config_key = 'CARDGATEIDEAL_ISSUERS'" );
+	    $db->execute("UPDATE ". TABLE_CONFIGURATION_PAYMENT. " SET config_value='" .$iRefreshTime ."' WHERE config_key = 'CARDGATEIDEAL_ISSUER_REFRESH'" );
+	}
+	
+	function fetchIssuers(){
+	    global $db;
+	    
+	    $sIssuers = $db->GetOne("SELECT config_value FROM ".TABLE_CONFIGURATION_PAYMENT." WHERE config_key='CARDGATEIDEAL_ISSUERS'");
+	    $aIssuers = unserialize($sIssuers);
+	    return $aIssuers;
 	}
 }
