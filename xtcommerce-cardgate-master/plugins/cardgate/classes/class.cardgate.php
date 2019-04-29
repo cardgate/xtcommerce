@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.5';
+	var $version = '1.5.6';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
@@ -86,7 +86,7 @@ class cardgate {
 	 * @access public
 	 */
 	function pspRedirect($aOrderData = null) {
-		
+	    
 		global $xtLink, $filter, $order, $db, $language;
 		require_once 'cardgate-clientlib-php/init.php';
 		
@@ -367,7 +367,6 @@ class cardgate {
 		return $items;
 	}
 	function getBanks(){
-		
 		try {
 			
 			require_once 'cardgate-clientlib-php/init.php';
