@@ -427,13 +427,20 @@ class cardgate {
 	            'name' => htmlspecialchars ( $oException_->getMessage () )
 	        ];
 	    }
-	    
-	    $sIssuers = serialize($aIssuers);
-	    $sMode = ($bIsTest ? 'TEST':'LIVE');
-	    $iRefreshTime = $sMode . (24 * 60 * 60 + time());
 
-	    $db->execute("UPDATE ". TABLE_CONFIGURATION_PAYMENT. " SET config_value='" .$sIssuers ."' WHERE config_key = 'CARDGATEIDEAL_ISSUERS'" );
-	    $db->execute("UPDATE ". TABLE_CONFIGURATION_PAYMENT. " SET config_value='" .$iRefreshTime ."' WHERE config_key = 'CARDGATEIDEAL_ISSUER_REFRESH'" );
+	    $aBanks = array();
+	    foreach($aIssuers as $key =>$aIssuer){
+			$aBanks[$aIssuer['id']] = $aIssuer['name'];
+	    }
+
+	    if (array_key_exists('INGBNL2A',$aBanks)) {
+		    $sIssuers     = serialize( $aIssuers );
+		    $sMode        = ( $bIsTest ? 'TEST' : 'LIVE' );
+		    $iRefreshTime = $sMode . ( 24 * 60 * 60 + time() );
+
+		    $db->execute( "UPDATE " . TABLE_CONFIGURATION_PAYMENT . " SET config_value='" . $sIssuers . "' WHERE config_key = 'CARDGATEIDEAL_ISSUERS'" );
+		    $db->execute( "UPDATE " . TABLE_CONFIGURATION_PAYMENT . " SET config_value='" . $iRefreshTime . "' WHERE config_key = 'CARDGATEIDEAL_ISSUER_REFRESH'" );
+	    }
 	}
 	
 	function fetchIssuers(){

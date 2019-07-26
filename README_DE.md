@@ -15,7 +15,7 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 
 1. Downloaden und entpacken Sie den aktuellsten [Source Code](https://github.com/cardgate/xtcommerce/releases/) auf Ihrem Desktop.
 
-2. Laden Sie die **Inhalte** des **xtcommerce** Ordners in das Root-Verzeichnis Ihrer Webseite.
+2. Laden Sie die **Inhalt** der **Zip-Datei** in den **Root-Ordner** Ihres Webshops.
 
 ## Configuration
 
