@@ -1,7 +1,7 @@
 *
 !.gitignore
-!cardgate
-!plugins
+!cardgate/
+!plugins/
 plugins/*
 !plugins/cardgate
 !plugins/cardgateafterpay
