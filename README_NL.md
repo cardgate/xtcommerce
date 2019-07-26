@@ -16,7 +16,7 @@ of neem contact op met je accountmanager.
 
 1. Download en unzip de meest recente [source code](https://github.com/cardgate/xtcommerce/releases/) op je bureaublad.
 
-2. Plaats de **inhoud** van de **xtcommerce** map in de root van je website.
+2. Plaats de **inhoud** van het **zip bestand** in de **root** van je website.
 
 ## Configuratie
 
