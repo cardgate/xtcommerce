@@ -1,0 +1,155 @@
+{*
+ * Shop System Plugins - Terms of Use
+ *
+ * These plugins are offered by CardGate
+ *
+ * They have been tested and approved for full functionality in the standard
+ * configuration
+ * (status on delivery) of the corresponding shop system. They are under
+ * General Public License Version 2 (GPLv2) and can be used, developed and
+ * passed on to third parties under the same terms.
+ *
+ * However, CardGate does not provide any guarantee or accept any liability
+ * for any errors occurring when used in an enhanced, customized shop system
+ * configuration.
+ *
+ * Operation in an enhanced, customized configuration is at your own risk and
+ * requires a comprehensive test phase by the user of the plugin.
+ *
+ * Customers use the plugins at their own risk. CardGate does not guarantee
+ * their full functionality neither does CardGate assume liability for any
+ * disadvantages related to the use of the plugins. Additionally, CardGate
+ * does not guarantee the full functionality for customized shop systems or
+ * installed plugins of other vendors of plugins within the same shop system.
+ *
+ * Customers are responsible for testing the plugin's functionality before
+ * starting productive operation.
+ *
+ * By installing the plugin into the shop system the customer agrees to these
+ * terms of use. Please do not use the plugin if you do not agree to these
+ * terms of use!
+*}
+
+{if $plugin}
+
+{capture name="paymenttypes"}
+<h4>No CardGate paymenttype activated</h4>
+{/capture}
+
+{if $plugin->getMajorVersion() > 4}
+{capture name="paymenttypes"}
+    <div class="item item-{$payment_code} payment-container">
+    <img src="https://cdn.curopayments.net/images/paymentmethods/{substr($payment_code,8)}.svg" style="max-height:30px;max-width:70px;" class="icon img-responsive img-thumbnail pull-right" alt={$payment_name} >
+    <header data-toggle="collapse" data-target=".item-{$payment_code} .collapse">
+            <label class="cursor-pointer">
+                <span class="check">
+                    <input type=radio name=selected_payment value={$payment_code}:{$payment.name} style="vertical-align: text-top;" id=selected_payment{$payment_id} >
+                </span>
+                <span class="name payment-name">{$payment_name}</span>
+                {if $payment_price.formated}
+                <small class="price">&nbsp;{$payment_price.formated}</small>
+                {/if}
+            </label>
+        </header>
+        <div class="desc collapse{if $isSelected} in{/if} payment-desc">
+        <select style="width:180px" name="cardgate_bank">
+        	{foreach from=$cardgate_ideal_banks item=bank}
+        		<option value="{$bank.id}">{$bank.name}</option>
+       		{/foreach}
+        </select>
+    	</div>
+    </div>
+{/capture}
+{/if}
+
+{if $plugin->getMajorVersion() <= 4}
+{capture name="paymenttypes"}
+ <tr>
+   <td class="main" width="10px">{form type=radio name=selected_payment value=$payment_code}</td>
+   <td class="main" width="100px"><img src="https://cdn.curopayments.net/images/paymentmethods/{substr($payment_code,8)}.svg" border="0"/>
+        <select style="width:180px" name="cardgate_bank">
+        	{foreach from=$cardgate_ideal_banks item=bank}
+        		<option value="{$bank.id}">{$bank.name}</option>
+       		{/foreach}
+        </select>
+   </td>
+   <td class="main"><strong>{$payment_name}</strong></td>
+  </tr>
+{/capture}
+{/if}
+
+{if $plugin->getMajorVersion() >= 4 && $plugin->getMinorVersion() >= 1}
+{literal}
+<style>
+    .wdtitle {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    .pull-right {
+        float: right;
+    }
+    .box-white .payment .payment-container header {
+        margin-right: 95px;
+        min-height: 55px;
+    }
+
+    .payment-container {
+        padding: 2px;
+    }
+
+</style>
+{/literal}
+
+<br style="clear: both"/>
+
+<div class="box box-white box-hover">
+    <div class="payment">
+        <p class="bold">
+            <table class="table tables-sm cg-paymenttable">
+               {$smarty.capture.paymenttypes}
+            </table>
+        </p>
+    </div>
+</div>
+<div class="payment-desc">
+</div>
+
+<div style="clear:both;height:0px;"></div>
+
+{elseif $plugin->getMajorVersion() > 4}
+{$smarty.capture.paymenttypes}
+{else}
+
+<table class="paymentblock" width="100%" border="0" cellspacing="0" cellpadding="6">
+    <tr>
+        <td class="header"></td>
+        <td class="header"><strong>{$payment_name}</strong></td>
+        <td class="header" align="right">{$payment_price.formated}</td>
+    </tr>
+
+    <tr>
+        <td colspan="3">
+            <table width="100%" border="0" cellspacing="0" cellpadding="6">
+                <tr>
+                    <td><img src="plugins/cardgate/images/cg_logo.png" border="0"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        {$smarty.capture.paymenttypes}
+                    </td>
+                    <td align="right">&nbsp;
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+<br/>
+
+{/if}
+{/if}

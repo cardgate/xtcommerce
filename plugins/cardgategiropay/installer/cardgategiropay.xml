@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xtcommerceplugin>
+	<title>Giropay</title>
+	<type>payment</type>
+	<version>1.0.0</version>
+	<code>cardgategiropay</code>
+	<url>http://cardgate.com</url>
+	<description>Zahlungsmodul Giropay</description>
+	<icon>cardgategiropay.png</icon>
+	<payment>
+		<payment_code>cardgategiropay</payment_code>
+		<payment_dir>cardgategiropay</payment_dir>
+		<payment_icon></payment_icon>
+		<payment_tpl>cardgategiropay.html</payment_tpl>
+		<de>
+			<title>Giropay</title>
+			<description></description>
+		</de>
+		<en>
+			<title>Giropay</title>
+			<description></description>
+		</en>
+		<nl>
+			<title>Giropay</title>
+			<description></description>
+		</nl>
+	</payment>
+
+	<db_install><![CDATA[
+        include_once _SRV_WEBROOT . _SRV_WEB_PLUGINS. '/cardgategiropay/installer/install.php';
+]]></db_install>
+
+	<plugin_code>
+		<code>
+			<hook>page_registry.php:bottom</hook>
+			<phpcode><![CDATA[
+define('PAGE_CARDGATEGIROPAY_CHECKOUT', _SRV_WEB_PLUGINS.'cardgategiropay/pages/cardgategiropay_checkout.php');
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+		<code>
+			<hook>class.checkout.php:_getPayment</hook>
+			<phpcode><![CDATA[
+      if(!empty($_COOKIE['QTAFFIWM'])){
+      
+        foreach($payment_data as $k => $v) {
+          if ($k != 'giropay') {
+            unset($payment_data[$k]);
+          }
+        }
+        reset($payment_data);
+      }
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+
+		<code>
+			<hook>class.checkout.php:_selectPayment_tpl_data</hook>
+			<phpcode><![CDATA[
+      require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgategiropay/hooks/checkout_selectpayment_tpl_data.php';
+    ]]></phpcode>
+			<order>1</order>
+			<active>1</active>
+		</code>
+
+		<code>
+			<hook>order_edit.php:display_data</hook>
+			<phpcode><![CDATA[
+            require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgategiropay/hooks/order_edit_display_data.php';
+    ]]></phpcode>
+			<order>0</order>
+			<active>1</active>
+		</code>
+		</plugin_code>
+
+	
+	<language_content>
+		<phrase>
+			<key>TEXT_PAYMENT_CARDGATE_GIROPAY</key>
+			<class>store</class>
+			<de>
+				<value>Giropay</value>
+			</de>
+			<en>
+				<value>Giropay</value>
+			</en>
+			<nl>
+				<value>Giropay</value>
+			</nl>
+		</phrase>
+	</language_content>
+</xtcommerceplugin>
