@@ -1,0 +1,15 @@
+{
+  "name": "cardgate/xtcommerce",
+  "type": "library",
+  "description": "CardGate payment processing module for xtCommerce",
+  "keywords": [
+    "xtcommerce",
+    "cardgate",
+    "payment"
+  ],
+  "homepage": "https://www.cardgate.com",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": { "Cardgate\\xtcommerce\\" : "" }
+  }
+}
