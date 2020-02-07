@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.6';
+	var $version = '1.5.7';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
@@ -63,7 +63,8 @@ class cardgate {
 	        'CARDGATE_PAYSAFECARD' => 'paysafecard',
 	        'CARDGATE_PAYSAFECASH' => 'paysafecash', 
 			'CARDGATE_PRZELEWY24' => 'przelewy24',
-			'CARDGATE_SOFORTBANKING' => 'sofortbanking' 
+			'CARDGATE_SOFORTBANKING' => 'sofortbanking',
+		    'CARDGATE_ONLINEUEBERWEISEN' => 'onlineueberweisen'
 	);
 	
 	/**

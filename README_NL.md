@@ -2,6 +2,8 @@
 
 # CardGate module voor xtCommerce
 
+[![Build Status](https://travis-ci.org/cardgate/xtcommerce.svg?branch=master)](https://travis-ci.org/cardgate/xtcommerce)
+
 ## Support
 
 Deze plug-in is geschikt voor xtCommerce versies **5** and **6**.

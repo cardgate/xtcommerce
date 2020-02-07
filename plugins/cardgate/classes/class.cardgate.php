@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.6';
+	var $version = '1.5.7';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
@@ -69,7 +69,7 @@ class cardgate {
 	 *
 	 * @access public
 	 */
-	function cardgate() {
+	function __construct() {
 		global $xtLink;
 	}
 	
@@ -332,7 +332,7 @@ class cardgate {
 			$iShippingVatTotal = $iTax;
 		}
 		
-		$iExtraFee;
+		//$iExtraFee;
 		
 		/*
 		 $fpExtraFee = (empty ( $woocommerce->session->extra_cart_fee ) ? 0 : $woocommerce->session->extra_cart_fee);
@@ -351,7 +351,7 @@ class cardgate {
 		 }
 		 */
 		
-		$iCorrection = round ( $iOrderTotal - $iCartItemTotal - $iCartItemTaxTotal - $iShippingTotal - $iShippingVatTotal - $iExtraFee );
+		$iCorrection = round ( $iOrderTotal - $iCartItemTotal - $iCartItemTaxTotal - $iShippingTotal - $iShippingVatTotal);
 		
 		if ($iCorrection != 0) {
 			
