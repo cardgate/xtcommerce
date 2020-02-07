@@ -16,6 +16,7 @@ plugins/*
 !plugins/cardgateideal
 !plugins/cardgateidealqr
 !plugins/cardgateklarna
+!plugins/cardgateonlineueberweisen
 !plugins/cardgatepaypal
 !plugins/cardgatepaysafecard
 !plugins/cardgatepaysafecash
@@ -62,6 +63,7 @@ templates/xt_mobile/plugins/*
 !templates/xt_mobile/plugins/cardgategiropay
 !templates/xt_mobile/plugins/cardgateideal
 !templates/xt_mobile/plugins/cardgateklarna
+!templates/xt_mobile/plugins/cardgateonlineueberweisen
 !templates/xt_mobile/plugins/cardgatepaypal
 !templates/xt_mobile/plugins/cardgatepaysafecard
 !templates/xt_mobile/plugins/cardgateprzelewy24
@@ -79,6 +81,12 @@ templates/xt_responsive/xtCore/pages/checkout/*
 !templates/xt_responsive/xtCore/pages/checkout/subpage_cardgate_failure.html
 !templates/xt_responsive/xtCore/pages/checkout/subpage_cardgate_pending.html
 !templates/xt_responsive/xtCore/pages/checkout/subpage_cardgate_success.html
+!tests/
+!tests/bootstrap.php
+!tests/phpunit.xml
 !README.md
 !README_DE.md
 !README_NL.md
+!composer.json
+!.travis.yml
+!phpunit.xml.dist
