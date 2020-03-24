@@ -16,9 +16,9 @@ of neem contact op met je accountmanager.
 
 ## Installatie
 
-1. Download en unzip de meest recente [source code](https://github.com/cardgate/xtcommerce/releases/) op je bureaublad.
+1. Download en unzip de meest recente [cardgate,zip](https://github.com/cardgate/xtcommerce/releases/) op je bureaublad.
 
-2. Plaats de **inhoud** van het **zip bestand** in de **root** van je website.
+2. Plaats de **inhoud** van de **cardgate** map in de **root** map van je website.
 
 ## Configuratie
 
