@@ -6,7 +6,7 @@
 
 ## Support
 
-This plugin supports xtCommerce versions **5** and **6**.
+This plugin supports xtCommerce versions **5** and **6**
 
 ## Preparation
 

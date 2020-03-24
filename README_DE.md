@@ -6,7 +6,7 @@
 
 ## Support
 
-Dieses Plug-in ist geeignet für xtCommerce **5** und **6**.
+Dieses Plug-in ist geeignet für xtCommerce **5** und **6**
 
 ## Vorbereitung
 

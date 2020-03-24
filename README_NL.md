@@ -6,7 +6,7 @@
 
 ## Support
 
-Deze plug-in is geschikt voor xtCommerce versies **5** and **6**.
+Deze plug-in is geschikt voor xtCommerce versies **5** and **6**
 
 ## Voorbereiding
 
