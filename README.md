@@ -13,7 +13,7 @@ Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentia
 
 ## Installation
 
-1. Download and unzip the most recent [source code](https://github.com/cardgate/xtcommerce/releases) file on your desktop.
+1. Download and unzip the most recent [cardgate.zip](https://github.com/cardgate/xtcommerce/releases) file on your desktop.
 
 2. Upload the contents of the **zip file** to the **root** of your website.
 
