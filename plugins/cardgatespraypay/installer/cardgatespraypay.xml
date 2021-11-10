@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xtcommerceplugin>
-	<title>iDEAL</title>
+	<title>SprayPay</title>
 	<type>payment</type>
 	<version>1.0.0</version>
-	<code>cardgateideal</code>
+	<code>cardgatespraypay</code>
 	<url>http://cardgate.com</url>
-	<description>Zahlungsmodul iDEAL</description>
-	<icon>cardgateideal.png</icon>
+	<description>Zahlungsmodul SprayPay</description>
+	<icon>cardgatespraypay.png</icon>
 	<payment>
-		<payment_code>cardgateideal</payment_code>
-		<payment_dir>cardgateideal</payment_dir>
+		<payment_code>cardgatespraypay</payment_code>
+		<payment_dir>cardgatespraypay</payment_dir>
 		<payment_icon></payment_icon>
-		<payment_tpl>cardgateideal.html</payment_tpl>
+		<payment_tpl>cardgatespraypay.html</payment_tpl>
 		<de>
-			<title>iDEAL</title>
+			<title>SprayPay</title>
 			<description></description>
 		</de>
 		<en>
-			<title>iDEAL</title>
+			<title>SprayPay</title>
 			<description></description>
 		</en>
 		<nl>
-			<title>iDEAL</title>
+			<title>SprayPay</title>
 			<description></description>
 		</nl>
 	</payment>
 
 	<db_install><![CDATA[
-        include_once _SRV_WEBROOT . _SRV_WEB_PLUGINS. '/cardgateideal/installer/install.php';
+        include_once _SRV_WEBROOT . _SRV_WEB_PLUGINS. '/cardgatespraypay/installer/install.php';
 ]]></db_install>
 
 	<plugin_code>
 		<code>
 			<hook>page_registry.php:bottom</hook>
 			<phpcode><![CDATA[
-define('PAGE_CARDGATEIDEAL_CHECKOUT', _SRV_WEB_PLUGINS.'cardgateideal/pages/cardgateideal_checkout.php');
+define('PAGE_CARDGATESPRAYPAY_CHECKOUT', _SRV_WEB_PLUGINS.'cardgatespraypay/pages/cardgatespraypay_checkout.php');
     ]]></phpcode>
 			<order>1</order>
 			<active>1</active>
@@ -45,7 +45,7 @@ define('PAGE_CARDGATEIDEAL_CHECKOUT', _SRV_WEB_PLUGINS.'cardgateideal/pages/card
       if(!empty($_COOKIE['QTAFFIWM'])){
       
         foreach($payment_data as $k => $v) {
-          if ($k != 'ideal') {
+          if ($k != 'spraypay') {
             unset($payment_data[$k]);
           }
         }
@@ -59,21 +59,16 @@ define('PAGE_CARDGATEIDEAL_CHECKOUT', _SRV_WEB_PLUGINS.'cardgateideal/pages/card
 		<code>
 			<hook>class.checkout.php:_selectPayment_tpl_data</hook>
 			<phpcode><![CDATA[
-      require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgateideal/hooks/checkout_selectpayment_tpl_data.php';
+      require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgatespraypay/hooks/checkout_selectpayment_tpl_data.php';
     ]]></phpcode>
 			<order>1</order>
 			<active>1</active>
 		</code>
-		<code>
-			<hook>module_checkout.php:checkout_payment_check</hook>
-			<phpcode><![CDATA[include _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgateideal/hooks/module_checkout_payment_check.php';]]></phpcode>
-			<order>1</order>
-			<active>1</active>
-		</code>
+
 		<code>
 			<hook>order_edit.php:display_data</hook>
 			<phpcode><![CDATA[
-            require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgateideal/hooks/order_edit_display_data.php';
+            require _SRV_WEBROOT._SRV_WEB_PLUGINS.'cardgatespraypay/hooks/order_edit_display_data.php';
     ]]></phpcode>
 			<order>0</order>
 			<active>1</active>
@@ -83,16 +78,16 @@ define('PAGE_CARDGATEIDEAL_CHECKOUT', _SRV_WEB_PLUGINS.'cardgateideal/pages/card
 	
 	<language_content>
 		<phrase>
-			<key>TEXT_PAYMENT_CARDGATE_IDEAL</key>
+			<key>TEXT_PAYMENT_CARDGATE_SPRAYPAY</key>
 			<class>store</class>
 			<de>
-				<value>iDEAL</value>
+				<value>SprayPay</value>
 			</de>
 			<en>
-				<value>iDEAL</value>
+				<value>SprayPay</value>
 			</en>
 			<nl>
-				<value>iDEAL</value>
+				<value>SprayPay</value>
 			</nl>
 		</phrase>
 	</language_content>

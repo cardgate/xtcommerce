@@ -64,7 +64,7 @@ class cardgate {
 	        'CARDGATE_PAYSAFECASH' => 'paysafecash', 
 			'CARDGATE_PRZELEWY24' => 'przelewy24',
 			'CARDGATE_SOFORTBANKING' => 'sofortbanking',
-		    'CARDGATE_ONLINEUEBERWEISEN' => 'onlineueberweisen'
+			'CARDGATE_SPRAYPAY' => 'spraypay'
 	);
 	
 	/**

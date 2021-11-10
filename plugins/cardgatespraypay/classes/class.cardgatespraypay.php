@@ -36,7 +36,7 @@ defined ( '_VALID_CALL' ) or die ( 'Direct Access is not allowed.' );
 $sRootPath = dirname(dirname(dirname(dirname(__FILE__))));
 require_once( $sRootPath . '/cardgate/classes/cardgate.php' );
 
-class cardgatesofortbanking extends cardgate{
+class cardgatespraypay extends cardgate{
 	function __construct() {
 		parent::__construct();
 	}

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Shop System Plugins - Terms of Use
  *
@@ -31,29 +30,36 @@
  * terms of use. Please do not use the plugin if you do not agree to these
  * terms of use!
  */
-defined ( '_VALID_CALL' ) or die ( 'Direct Access is not allowed.' );
 
-$sRootPath = dirname(dirname(dirname(dirname(__FILE__))));
-require_once( $sRootPath . '/cardgate/classes/cardgate.php' );
+defined('_VALID_CALL') or die('Direct Access is not allowed.');
 
-class cardgatesofortbanking extends cardgate{
-	function __construct() {
-		parent::__construct();
-	}
-	
-	/**
-	 * XTC-Funktion, um das Paymentrequest an einen externen PSP zu senden
-	 *
-	 * Die Funktion spiegelt in etwa die alte "payment_action" wieder. An dieser Stelle
-	 * wird die Anfrage gestellt und je nach der Ergebnis der Sprung auf die entsprechende
-	 * Seite vorbereitet (idR IFrame oder Fehlerseite)
-	 *
-	 * @param $order_data array
-	 *        	mit den wichtigsten Infos zur Bestellung
-	 * @return URL, zu der als nächstes gesprungen werden soll
-	 * @access public
-	 */
-	function pspRedirect($aOrderData = null) {
-		return parent::pspRedirect($aOrderData);
-	}
+if ($this->order_data['order_data']['payment_code'] == 'spraypay') {
+    /** @global ADODB_mysql $db */
+    global $db;
+
+    $rs = $db->GetAssoc("SELECT * FROM cardgate_transaction WHERE orderid=?", array((int)$this->order_data['order_data']['orders_id']));
+    if (count($rs))
+    {
+        $cg_data = array_pop($rs);
+        if (strlen($cg_data['RESPONSEDATA']))
+        {
+            $blacklist = array('last_order_id');
+            $info = json_decode($cg_data['RESPONSEDATA']);
+            foreach ($info as $k => $v)
+            {
+                if (in_array($k, $blacklist))
+                    continue;
+                $tpl_data['order_data']['order_info_options'][] = array('text' => $k, 'value' => $v);
+            }
+
+        }
+    }
+
+//    if($rs->RecordCount()>0) {
+//        print "xxx";
+//        foreach ($rs as $v)
+//            print_r($v);
+//    }
+
 }
+
