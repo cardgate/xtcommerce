@@ -2,11 +2,9 @@
 
 # CardGate Plug-in für xtCommerce
 
-[![Build Status](https://travis-ci.org/cardgate/xtcommerce.svg?branch=master)](https://travis-ci.org/cardgate/xtcommerce)
-
 ## Support
 
-Dieses Plug-in ist geeignet für xtCommerce **5** und **6**
+Dieses Plug-in ist geeignet für xtCommerce **5** und **6**.
 
 ## Vorbereitung
 
@@ -15,9 +13,9 @@ Gehen zu [My CardGate](https://my.cardgate.com/) und fragen Sie Ihre Zugangsdate
 
 ## Installation
 
-1. Downloaden und entpacken Sie den aktuellsten [cardgate.zip](https://github.com/cardgate/xtcommerce/releases/) Datei auf Ihrem Desktop.
+1. Downloaden und entpacken Sie den aktuellsten [Source Code](https://github.com/cardgate/xtcommerce/releases/) auf Ihrem Desktop.
 
-2. Laden Sie die **Inhalt** den **Cardgate**-Ordner in den **Root-Ordner** Ihres Webshops.
+2. Laden Sie die **Inhalt** der **Zip-Datei** in den **Root-Ordner** Ihres Webshops.
 
 ## Configuration
 

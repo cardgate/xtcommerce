@@ -22,6 +22,7 @@ plugins/*
 !plugins/cardgatepaysafecash
 !plugins/cardgateprzlewy24
 !plugins/cardgatesofortbanking
+!plugins/cardgatespraypay
 !templates
 templates/*
 !templates/xt_default
@@ -68,6 +69,7 @@ templates/xt_mobile/plugins/*
 !templates/xt_mobile/plugins/cardgatepaysafecard
 !templates/xt_mobile/plugins/cardgateprzelewy24
 !templates/xt_mobile/plugins/cardgatesofortbanking
+!templates/xt_mobile/plugins/cardgatespraypay
 !templates/xt_responsive
 templates/xt_responsive/*
 !templates/xt_responsive/xtCore
