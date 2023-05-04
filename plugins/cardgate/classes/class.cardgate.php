@@ -120,11 +120,6 @@ class cardgate {
 			$sMerchantApiKey = CARDGATE_MERCHANT_API_KEY;
 			$bIsTest = (CARDGATE_TEST_MODE == 'true' ? true : false);
 			$sLanguage = $aOrderData ['language_code'];
-			if ($this->getMajorVersion () <= 4) {
-				$sPlatformVersion = 'xtCommerce4';
-			} else {
-				$sPlatformVersion = 'xtCommerce5';
-			}
 			$iSiteId = ( int ) CARDGATE_SITE_ID;
 			$iAmount = ( int ) round ( $order->order_total ['total'] ['plain'] * 100 );
 			$sCurrency = $aOrderData ['currency_code'];
@@ -146,7 +141,7 @@ class cardgate {
 			$oCardGate->setIp ( $_SERVER ['REMOTE_ADDR'] );
 			$oCardGate->setLanguage ( $sLanguage );
 			$oCardGate->version ()->setPlatformName ( 'xtCommerce' );
-			$oCardGate->version ()->setPlatformVersion ( $sPlatformVersion );
+			$oCardGate->version ()->setPlatformVersion (_SYSTEM_VERSION );
 			$oCardGate->version ()->setPluginName ( 'CardGate' );
 			$oCardGate->version ()->setPluginVersion ( $this->version );
 			
