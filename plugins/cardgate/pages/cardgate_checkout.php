@@ -56,13 +56,13 @@ if ($page->page_action == 'confirm') {
 				die ( 'Hashcheck failed!' );
 			}
 		} catch ( cardgate\api\Exception $oException_ ) {
-			die ( 'Hashckeck failed!' );
+			die ( 'Hashcheck failed!' );
 		}
 	}
 	
 	// hashcheck has passed
 	// process order
-	
+
 	$result = $db->Execute ( "SELECT ORDERID FROM " . TABLE_CARDGATE_TRANSACTION . " WHERE TRID = '" . $data ['reference'] . "' LIMIT 1" );
 	$fields = $result->fields;
 	$iOrderId = ( int ) $fields ['ORDERID'];
@@ -72,7 +72,7 @@ if ($page->page_action == 'confirm') {
 	if (checkPaid ( $order )) {
 		die ( 'Payment already processed!' );
 	}
-	
+
 	if ($data ['code'] == '0') {
 		$paymentState = 'PENDING';
 	}
@@ -97,12 +97,11 @@ if ($page->page_action == 'confirm') {
 			), 'UPDATE', 'TRID="' . $data ['reference'] . '"' );
 			updateOrderPayment ( $iOrderId, $paymentState );
 		}
-		
+
 		$strMsg = TEXT_CARDGATE_PAYMENT_COMMENT . ' ' . constant ( "TEXT_PAYMENT_CARDGATE_" . strtoupper ( $data ['pt'] ) );
-		;
-		
-		$order->_sendOrderMail ();
 		$order->_updateOrderStatus ( CARDGATE_ORDER_STATUS_COMPLETED, $strMsg, 'true', 'true', 'user', $data ['transaction'] );
+		$order->_sendOrderMail ();
+
 	}
 	
 	if ($paymentState == 'PENDING') {
@@ -196,7 +195,7 @@ if ($page->page_action == 'confirm') {
 function checkPaid($order) {
 	return ( bool ) ($order->order_data ['orders_status_id'] == CARDGATE_ORDER_STATUS_COMPLETED);
 }
-function updateOrderPayment($oid, $strOrderStatus, $callback_id='',$callback_messge='') {
+function updateOrderPayment($oid, $strOrderStatus, $callback_id='',$callback_message='') {
 	$parts = explode ( '.', _SYSTEM_VERSION );
 	$iVersion = ( int ) $parts [0];
 	
