@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.8';
+	var $version = '1.5.9';
 	var $paymentTypes = array (
 			'CARDGATE_AFTERPAY' => 'afterpay',
 			'CARDGATE_BANCONTACT' => 'bancontact',
@@ -138,7 +138,7 @@ class cardgate {
 			$oCardGate->setIp ( $_SERVER ['REMOTE_ADDR'] );
 			$oCardGate->setLanguage ( $sLanguage );
 			$oCardGate->version ()->setPlatformName ( 'xtCommerce' );
-			$oCardGate->version ()->setPlatformVersion ( _SYSTEM_VERSION );
+			$oCardGate->version ()->setPlatformVersion ( strval(_SYSTEM_VERSION) );
 			$oCardGate->version ()->setPluginName ( 'CardGate' );
 			$oCardGate->version ()->setPluginVersion ( $this->version );
 			
