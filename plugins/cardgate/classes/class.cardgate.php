@@ -45,7 +45,7 @@ class cardgate {
 	 */
 	var $demoMode = false;
 	var $initParams = array ();
-	var $version = '1.5.8';
+	var $version = '1.5.9';
 	var $paymentTypes = array (
 		'CARDGATE_AFTERPAY' => 'afterpay',
 		'CARDGATE_BANCONTACT' => 'bancontact',
